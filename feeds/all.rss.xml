@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NextGen$'s blog</title><link>/</link><description></description><atom:link href="http://florent.daigniere.com//feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 21 Mar 2014 11:06:00 +0000</lastBuildDate><item><title>Hello world!</title><link>/posts/2014/03/hello-world/</link><description>&lt;p&gt;This is our first post!! A classic&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NextGen$'s blog</title><link>/</link><description></description><atom:link href="http://florent.daigniere.com/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 21 Mar 2014 11:06:00 +0000</lastBuildDate><item><title>Hello world!</title><link>/posts/2014/03/hello-world/</link><description>&lt;p&gt;This is our first post!! A classic&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HELO world!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;See you soon ;)&lt;/p&gt;
