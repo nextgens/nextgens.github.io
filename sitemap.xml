@@ -4,112 +4,112 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>/index.html</loc>
-<lastmod>2014-03-25T13:24:45-00:00</lastmod>
+<loc>http://florent.daigniere.com/index.html</loc>
+<lastmod>2014-03-25T13:28:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/archives.html</loc>
-<lastmod>2014-03-25T13:24:45-00:00</lastmod>
+<loc>http://florent.daigniere.com/archives.html</loc>
+<lastmod>2014-03-25T13:28:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tags.html</loc>
-<lastmod>2014-03-25T13:24:45-00:00</lastmod>
+<loc>http://florent.daigniere.com/tags.html</loc>
+<lastmod>2014-03-25T13:28:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/categories.html</loc>
-<lastmod>2014-03-25T13:24:45-00:00</lastmod>
+<loc>http://florent.daigniere.com/categories.html</loc>
+<lastmod>2014-03-25T13:28:27-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/pages/about-florent.html</loc>
-<lastmod>2014-03-25T13:24:45-00:00</lastmod>
+<loc>http://florent.daigniere.com/pages/about-florent.html</loc>
+<lastmod>2014-03-25T13:28:27-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/posts/2014/03/is-santanderuk-compromised/</loc>
+<loc>http://florent.daigniere.com/posts/2014/03/is-santanderuk-compromised/</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/posts/2014/03/hello-world/</loc>
+<loc>http://florent.daigniere.com/posts/2014/03/hello-world/</loc>
 <lastmod>2014-03-21T11:06:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/category/blog.html</loc>
+<loc>http://florent.daigniere.com/category/blog.html</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/spam.html</loc>
+<loc>http://florent.daigniere.com/tag/spam.html</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/helloworld.html</loc>
+<loc>http://florent.daigniere.com/tag/helloworld.html</loc>
 <lastmod>2014-03-21T11:06:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/blog.html</loc>
+<loc>http://florent.daigniere.com/tag/blog.html</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/banking.html</loc>
+<loc>http://florent.daigniere.com/tag/banking.html</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/security.html</loc>
+<loc>http://florent.daigniere.com/tag/security.html</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/pwned.html</loc>
+<loc>http://florent.daigniere.com/tag/pwned.html</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/tag/first.html</loc>
+<loc>http://florent.daigniere.com/tag/first.html</loc>
 <lastmod>2014-03-21T11:06:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>/author/florent-daigniere.html</loc>
+<loc>http://florent.daigniere.com/author/florent-daigniere.html</loc>
 <lastmod>2014-03-25T10:10:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
