@@ -41,49 +41,62 @@
 
 	<section id="posts">
 	<header>
-		<h1><a href="http://florent.daigniere.com/">Florent Daignière</a>'s blog</h1>
-		<h3>
-			<script type="text/javascript">
-				var currentDate = new Date();
-				var day = currentDate.getDate();
-				var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-				var month = monthNames[currentDate.getMonth()].toUpperCase();
-				var year = currentDate.getFullYear();
-				document.write(month + " " + day + ", " + year);
-			</script>
-		</h3>
+		<h1>Florent Daignière's blog</h1>
+		<h3>Posted 25 Mar, 2014</h3>
 	</header>
-
-	<dl>
-		<ol>
-				<li>
-					<h1 class="title">
-						<a href="/posts/2014/03/is-santanderuk-compromised/" rel="bookmark" title="Permalink to Is SantanderUK compromised?">Is SantanderUK compromised?</a>
-					</h1>
-					<abbr class="published" title="2014-03-25T10:10:00">25 Mar, 2014</abbr>
-				<div class="entry-content"> <p>This morning I have received a special spam, the kind that warrants a blog post.</p>
+	<article>
+		<h1 id="title">
+			<a href="/posts/2014/03/is-santanderuk-compromised/" rel="bookmark"
+				title="Permalink to Is SantanderUK compromised?">Is SantanderUK compromised?</a>
+		</h1>
+		<p>This morning I have received a special spam, the kind that warrants a blog post.</p>
 <p>It's interesting for several reasons:</p>
 <ul class="simple">
 <li>It has my name in the Subject Header</li>
 <li>It came through an address that I have only given to my bank</li>
-<li>It uses a clever old-school trick to avoid ...</li></ul> </div>
-				</li>
-				<li>
-					<h1 class="title">
-						<a href="/posts/2014/03/hello-world/" rel="bookmark" title="Permalink to Hello world!">Hello world!</a>
-					</h1>
-					<abbr class="published" title="2014-03-21T11:06:00">21 Mar, 2014</abbr>
-				<div class="entry-content"> <p>This is our first post!! A classic</p>
-<div class="highlight"><pre><span class="k">print</span><span class="p">(</span><span class="s">&quot;HELO world!&quot;</span><span class="p">)</span>
-</pre></div>
-<p>See you soon ;)</p>
- </div>
-				</li>
-		</ol>
-	</dl>
+<li>It uses a clever old-school trick to avoid <a class="reference external" href="https://en.wikipedia.org/wiki/Bayesian_spam_filtering">bayesian filtering</a> (text hidden with white fonts on a white background)</li>
+<li>It used Microsoft's delivery infrastructure (and therefore didn't have any problems with <a class="reference external" href="https://en.wikipedia.org/wiki/Greylisting">grey-listing</a>)</li>
+<li>It uses 'sane' headers and no links (which tends to be a red-flag for spams)</li>
+</ul>
+<p>As a security professional, when I see that type of targeted spam, several questions spring to mind:</p>
+<ul class="simple">
+<li>Have they sold my details? If so, where did they get my consent from?</li>
+<li>If not, they must have been compromised. What else have they leaked? Do they even know?</li>
+</ul>
+<p>I have sent them an email this morning, asking the questions above... and will update this post with their reply.</p>
+<p>For the curious, here is a copy of the <a class="reference external" href="https://gist.github.com/nextgens/9758683">spam from Santander</a>.</p>
 
-<p class="paginator">
-</p>
+
+		<div id="article_meta">
+				Category:
+					<a href="/category/blog.html">Blog</a>
+				<br />Tags:
+					<a href="/tag/pwned.html">pwned</a>
+					<a href="/tag/blog.html">blog</a>
+					<a href="/tag/security.html">security</a>
+					<a href="/tag/banking.html">banking</a>
+					<a href="/tag/spam.html">spam</a>
+		</div>
+	</article>
+
+	<footer>
+		<a href="/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+	</footer>
+
+	<div id="comments">
+		<h2>Comments</h2>
+		<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			var disqus_identifier = "posts/2014/03/is-santanderuk-compromised/";
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://nextgens.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+	</div>
+
 	</section>
 
 <script type="text/javascript">

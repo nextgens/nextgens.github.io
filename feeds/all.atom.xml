@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>NextGen$'s blog</title><link href="/" rel="alternate"></link><link href="http://florent.daigniere.com/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-03-21T11:06:00+00:00</updated><entry><title>Hello world!</title><link href="/posts/2014/03/hello-world/" rel="alternate"></link><updated>2014-03-21T11:06:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:,2014-03-21:posts/2014/03/hello-world/</id><summary type="html">&lt;p&gt;This is our first post!! A classic&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>NextGen$'s blog</title><link href="/" rel="alternate"></link><link href="http://florent.daigniere.com/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-03-25T10:10:00+00:00</updated><entry><title>Is SantanderUK compromised?</title><link href="/posts/2014/03/is-santanderuk-compromised/" rel="alternate"></link><updated>2014-03-25T10:10:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:,2014-03-25:posts/2014/03/is-santanderuk-compromised/</id><summary type="html">&lt;p&gt;This morning I have received a special spam, the kind that warrants a blog post.&lt;/p&gt;
+&lt;p&gt;It's interesting for several reasons:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;It has my name in the Subject Header&lt;/li&gt;
+&lt;li&gt;It came through an address that I have only given to my bank&lt;/li&gt;
+&lt;li&gt;It uses a clever old-school trick to avoid &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Bayesian_spam_filtering"&gt;bayesian filtering&lt;/a&gt; (text hidden with white fonts on a white background)&lt;/li&gt;
+&lt;li&gt;It used Microsoft's delivery infrastructure (and therefore didn't have any problems with &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Greylisting"&gt;grey-listing&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;It uses 'sane' headers and no links (which tends to be a red-flag for spams)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As a security professional, when I see that type of targeted spam, several questions spring to mind:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Have they sold my details? If so, where did they get my consent from?&lt;/li&gt;
+&lt;li&gt;If not, they must have been compromised. What else have they leaked? Do they even know?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I have sent them an email this morning, asking the questions above... and will update this post with their reply.&lt;/p&gt;
+&lt;p&gt;For the curious, here is a copy of the &lt;a class="reference external" href="https://gist.github.com/nextgens/9758683"&gt;spam from Santander&lt;/a&gt;.&lt;/p&gt;
+</summary><category term="pwned"></category><category term="blog"></category><category term="security"></category><category term="banking"></category><category term="spam"></category></entry><entry><title>Hello world!</title><link href="/posts/2014/03/hello-world/" rel="alternate"></link><updated>2014-03-21T11:06:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:,2014-03-21:posts/2014/03/hello-world/</id><summary type="html">&lt;p&gt;This is our first post!! A classic&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HELO world!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;See you soon ;)&lt;/p&gt;
