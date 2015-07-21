@@ -88,7 +88,7 @@
 <div class="highlight"><pre><span class="go">iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p udp -m udp --dport 53 -j DNAT --to-destination $LAN_IP</span>
 <span class="go">iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p tcp -m tcp --dport 53 -j DNAT --to-destination $LAN_IP</span>
 </pre></div>
-<p>That works wonders and looks like the ultimate solution to me. It's not wasting bandwidth encapsulating traffic through a tunnel nor trusting random unknowns on the internet to route it for me... and it's free!</p>
+<p>That works wonders and is the ultimate solution to me. It's not wasting bandwidth encapsulating traffic through a tunnel nor trusting random unknowns on the internet to route it for me... and it's free!</p>
 
 
 		<div id="article_meta">
