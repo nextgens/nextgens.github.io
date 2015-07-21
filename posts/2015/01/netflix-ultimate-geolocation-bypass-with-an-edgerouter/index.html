@@ -85,8 +85,8 @@
 <span class="go"> type destination</span>
 </pre></div>
 <p>Using iptables, it would look like that:</p>
-<div class="highlight"><pre><span class="go">iptables -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p udp -m udp --dport 53 -j DNAT --to-destination $LAN_IP</span>
-<span class="go">iptables -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p tcp -m tcp --dport 53 -j DNAT --to-destination $LAN_IP</span>
+<div class="highlight"><pre><span class="go">iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p udp -m udp --dport 53 -j DNAT --to-destination $LAN_IP</span>
+<span class="go">iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p tcp -m tcp --dport 53 -j DNAT --to-destination $LAN_IP</span>
 </pre></div>
 <p>That works wonders and looks like the ultimate solution to me. It's not wasting bandwidth encapsulating traffic through a tunnel nor trusting random persons on the internet to route it for me... and it's free!</p>
 

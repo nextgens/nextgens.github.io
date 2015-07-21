@@ -32,8 +32,8 @@
 &lt;span class="go"&gt; type destination&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Using iptables, it would look like that:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;iptables -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p udp -m udp --dport 53 -j DNAT --to-destination $LAN_IP&lt;/span&gt;
-&lt;span class="go"&gt;iptables -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p tcp -m tcp --dport 53 -j DNAT --to-destination $LAN_IP&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p udp -m udp --dport 53 -j DNAT --to-destination $LAN_IP&lt;/span&gt;
+&lt;span class="go"&gt;iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p tcp -m tcp --dport 53 -j DNAT --to-destination $LAN_IP&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That works wonders and looks like the ultimate solution to me. It's not wasting bandwidth encapsulating traffic through a tunnel nor trusting random persons on the internet to route it for me... and it's free!&lt;/p&gt;
 </summary><category term="edgerouter"></category><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>CVE-2014-1409 or the sad tale of an XPath injection affecting mobileiron products</title><link href="http://florent.daigniere.com/posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/" rel="alternate"></link><updated>2014-06-23T11:06:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2014-06-23:posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/</id><summary type="html">&lt;p&gt;Following up on my last post about &lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injections, I will document part of the process we went through to exploit &lt;a class="reference external" href="https://www.trustmatta.com/advisories/MATTA-2013-004.txt"&gt;CVE-2014-1409&lt;/a&gt; and hopefully convince a few that this category of bugs is no joke and should be looked for during pentests.&lt;/p&gt;
