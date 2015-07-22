@@ -5,7 +5,7 @@
 &lt;p&gt;The following command can be used to see how the processes are grouped by your init system:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;ps xawf -eo pid,user,cgroup,args
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;At this stage, when I finally obtained a command prompt on the remote server, I knew that the cause of the problem was kernel-related. So my first command was &lt;cite&gt;dmesg&lt;/cite&gt;&lt;/p&gt;
+&lt;p&gt;At this stage, when I've finally obtained a command prompt on the remote server, I knew that the cause of the problem was kernel-related. So my first command was &lt;cite&gt;dmesg&lt;/cite&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;...&lt;/span&gt;
 &lt;span class="go"&gt;nf_conntrack: table full, dropping packet.&lt;/span&gt;
 &lt;span class="go"&gt;...&lt;/span&gt;
