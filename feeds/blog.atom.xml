@@ -3,7 +3,7 @@
 &lt;p&gt;Early in the morning, the supervision system has started alerting me that the response time of one of the virtualization hosts we use at &lt;a class="reference external" href="https://www.trustmatta.com/"&gt;Matta&lt;/a&gt; is going through the roof; making everything 'feel' slow.&lt;/p&gt;
 &lt;p&gt;Connecting to the system through SSH is already taking tens of seconds, indicating that something is indeed seriously wrong. Modern linux systems use resource isolation in the form of &lt;a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt"&gt;cgroups&lt;/a&gt; and are quite resilient to obnoxious programs chewing up resources; The traditional &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Fork_bomb"&gt;fork-bomb&lt;/a&gt; is a lot less effective than it used to be thanks to these improvements.&lt;/p&gt;
 &lt;p&gt;The following command can be used to see how the processes are grouped by your init system:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;ps xawf -eo pid,user,cgroup,args&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ps xawf -eo pid,user,cgroup,args
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;At this stage, when I finally obtained a command prompt on the remote server, I knew that the cause of the problem was kernel-related. So my first command was &lt;cite&gt;dmesg&lt;/cite&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;...&lt;/span&gt;
@@ -12,11 +12,11 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This message is familiar; being a penetration testing company, we are using and abusing of advanced TCP trickery, confusing the hell out of any stateful firewall in the way. Tonight, the culprit was &lt;a class="reference external" href="https://nmap.org/"&gt;Nmap&lt;/a&gt; conducting a &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Port_scanner#SYN_scanning"&gt;SYN scan&lt;/a&gt;...&lt;/p&gt;
 &lt;p&gt;No matter how much resources I could allocate to the tracking table, it will never be big enough... and fundamentally, there is no reason to filter the traffic bridged from the VM to the network using a stateful firewall. In the past I've decided to deal with that specific problem by setting a rule to tell netfilter to specifically disregard the traffic flowing through the bridged devices. This was achieved with the following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;iptables --table raw -A PREROUTING -m physdev --physdev-is-bridged -j NOTRACK&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;iptables --table raw -A PREROUTING -m physdev --physdev-is-bridged -j NOTRACK
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It worked well; up until the point where a new rule was introduced, negating its effects. The improved solution reads:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;echo net.bridge.bridge-nf-call-iptables=0 &amp;gt;&amp;gt; /etc/sysctl.conf&lt;/span&gt;
-&lt;span class="go"&gt;sysctl -p&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;echo &lt;/span&gt;net.bridge.bridge-nf-call-iptables&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &amp;gt;&amp;gt; /etc/sysctl.conf
+sysctl -p
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Live and learn as they say!&lt;/p&gt;
 </summary><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Netflix ultimate geolocation bypass with an edgerouter</title><link href="http://florent.daigniere.com/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/" rel="alternate"></link><updated>2015-01-05T19:06:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-01-05:posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/</id><summary type="html">&lt;p&gt;It looks like &lt;a class="reference external" href="http://www.engadget.com/2015/01/03/netflix-clamps-down-on-vpns/"&gt;Netflix has updated their geolocation code&lt;/a&gt;... attempting to prevent their users from watching content intended for other regions. This post explores a few technical avenues one might consider to bypass it.&lt;/p&gt;
@@ -52,8 +52,8 @@
 &lt;span class="go"&gt; type destination&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Using iptables, it would look like that:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p udp -m udp --dport 53 -j DNAT --to-destination $LAN_IP&lt;/span&gt;
-&lt;span class="go"&gt;iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i $LAN_IF -p tcp -m tcp --dport 53 -j DNAT --to-destination $LAN_IP&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt;/span&gt; -p udp -m udp --dport &lt;span class="m"&gt;53&lt;/span&gt; -j DNAT --to-destination &lt;span class="nv"&gt;$LAN_IP&lt;/span&gt;
+iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt;/span&gt; -p tcp -m tcp --dport &lt;span class="m"&gt;53&lt;/span&gt; -j DNAT --to-destination &lt;span class="nv"&gt;$LAN_IP&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That works wonders and is the ultimate solution to me. It's not wasting bandwidth encapsulating traffic through a tunnel nor trusting random unknowns on the internet to route it for me... and it's free!&lt;/p&gt;
 </summary><category term="edgerouter"></category><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>CVE-2014-1409 or the sad tale of an XPath injection affecting mobileiron products</title><link href="http://florent.daigniere.com/posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/" rel="alternate"></link><updated>2014-06-23T11:06:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2014-06-23:posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/</id><summary type="html">&lt;p&gt;Following up on my last post about &lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injections, I will document part of the process we went through to exploit &lt;a class="reference external" href="https://www.trustmatta.com/advisories/MATTA-2013-004.txt"&gt;CVE-2014-1409&lt;/a&gt; and hopefully convince a few that this category of bugs is no joke and should be looked for during pentests.&lt;/p&gt;

@@ -56,7 +56,7 @@
 <p>Early in the morning, the supervision system has started alerting me that the response time of one of the virtualization hosts we use at <a class="reference external" href="https://www.trustmatta.com/">Matta</a> is going through the roof; making everything 'feel' slow.</p>
 <p>Connecting to the system through SSH is already taking tens of seconds, indicating that something is indeed seriously wrong. Modern linux systems use resource isolation in the form of <a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">cgroups</a> and are quite resilient to obnoxious programs chewing up resources; The traditional <a class="reference external" href="https://en.wikipedia.org/wiki/Fork_bomb">fork-bomb</a> is a lot less effective than it used to be thanks to these improvements.</p>
 <p>The following command can be used to see how the processes are grouped by your init system:</p>
-<div class="highlight"><pre><span class="go">ps xawf -eo pid,user,cgroup,args</span>
+<div class="highlight"><pre>ps xawf -eo pid,user,cgroup,args
 </pre></div>
 <p>At this stage, when I finally obtained a command prompt on the remote server, I knew that the cause of the problem was kernel-related. So my first command was <cite>dmesg</cite></p>
 <div class="highlight"><pre><span class="go">...</span>
@@ -65,11 +65,11 @@
 </pre></div>
 <p>This message is familiar; being a penetration testing company, we are using and abusing of advanced TCP trickery, confusing the hell out of any stateful firewall in the way. Tonight, the culprit was <a class="reference external" href="https://nmap.org/">Nmap</a> conducting a <a class="reference external" href="https://en.wikipedia.org/wiki/Port_scanner#SYN_scanning">SYN scan</a>...</p>
 <p>No matter how much resources I could allocate to the tracking table, it will never be big enough... and fundamentally, there is no reason to filter the traffic bridged from the VM to the network using a stateful firewall. In the past I've decided to deal with that specific problem by setting a rule to tell netfilter to specifically disregard the traffic flowing through the bridged devices. This was achieved with the following command:</p>
-<div class="highlight"><pre><span class="go">iptables --table raw -A PREROUTING -m physdev --physdev-is-bridged -j NOTRACK</span>
+<div class="highlight"><pre>iptables --table raw -A PREROUTING -m physdev --physdev-is-bridged -j NOTRACK
 </pre></div>
 <p>It worked well; up until the point where a new rule was introduced, negating its effects. The improved solution reads:</p>
-<div class="highlight"><pre><span class="go">echo net.bridge.bridge-nf-call-iptables=0 &gt;&gt; /etc/sysctl.conf</span>
-<span class="go">sysctl -p</span>
+<div class="highlight"><pre><span class="nb">echo </span>net.bridge.bridge-nf-call-iptables<span class="o">=</span><span class="m">0</span> &gt;&gt; /etc/sysctl.conf
+sysctl -p
 </pre></div>
 <p>Live and learn as they say!</p>
 
