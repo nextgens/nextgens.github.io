@@ -5,35 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://florent.daigniere.com/</loc>
-<lastmod>2015-07-22T19:13:11-00:00</lastmod>
+<lastmod>2015-07-22T19:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://florent.daigniere.com/archives.html</loc>
-<lastmod>2015-07-22T19:13:11-00:00</lastmod>
+<lastmod>2015-07-22T19:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://florent.daigniere.com/tags.html</loc>
-<lastmod>2015-07-22T19:13:11-00:00</lastmod>
+<lastmod>2015-07-22T19:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://florent.daigniere.com/categories.html</loc>
-<lastmod>2015-07-22T19:13:11-00:00</lastmod>
+<lastmod>2015-07-22T19:19:43-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://florent.daigniere.com/pages/about-florent.html</loc>
-<lastmod>2015-07-22T19:13:11-00:00</lastmod>
+<lastmod>2015-07-22T19:19:43-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/</loc>
+<lastmod>2015-07-22T10:02:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -75,14 +82,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://florent.daigniere.com/category/blog.html</loc>
-<lastmod>2015-01-05T19:06:00+00:00</lastmod>
+<lastmod>2015-07-22T10:02:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://florent.daigniere.com/tag/blog.html</loc>
-<lastmod>2015-01-05T19:06:00+00:00</lastmod>
+<lastmod>2015-07-22T10:02:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -110,7 +117,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://florent.daigniere.com/tag/sysadmin.html</loc>
-<lastmod>2015-01-05T19:06:00+00:00</lastmod>
+<lastmod>2015-07-22T10:02:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -152,7 +159,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://florent.daigniere.com/author/florent-daigniere.html</loc>
-<lastmod>2015-01-05T19:06:00+00:00</lastmod>
+<lastmod>2015-07-22T10:02:00+00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

@@ -49,12 +49,12 @@
 	</header>
 	<article>
 		<h1 id="title">
-			<a href="http://florent.daigniere.com/drafts/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt.html" rel="bookmark"
+			<a href="http://florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/" rel="bookmark"
 				title="Permalink to Disabling connection tracking on bridge interfaces created by libvirt">Disabling connection tracking on bridge interfaces created by libvirt</a>
 		</h1>
-		<p>Today I got bitten by a problem I've already encountered in the past... and as I didn't document it properly I had to google it again. Let this blog entry be a more permanent documentation than the previous one.</p>
+		<p>Today I got bitten by a problem I've already encountered in the past... and as I didn't document it properly, I had to google it again! Let this blog entry be a more permanent documentation than the previous one.</p>
 <p>Early in the morning, the supervision system has started alerting me that the response time of one of the virtualization hosts we use at <a class="reference external" href="https://www.trustmatta.com/">Matta</a> is going through the roof; making everything 'feel' slow.</p>
-<p>Connecting to the system through SSH is already taking tens of seconds, indicating that something is indeed seriously wrong. Modern linux systems use resource isolation in the form of <a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">cgroups</a> and are quite resilient to obnoroxious programs chewing up resources; The traditional <a class="reference external" href="https://en.wikipedia.org/wiki/Fork_bomb">fork-bomb</a> is a lot less effective than it used to be thanks to these improvements.</p>
+<p>Connecting to the system through SSH is already taking tens of seconds, indicating that something is indeed seriously wrong. Modern linux systems use resource isolation in the form of <a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">cgroups</a> and are quite resilient to obnoxious programs chewing up resources; The traditional <a class="reference external" href="https://en.wikipedia.org/wiki/Fork_bomb">fork-bomb</a> is a lot less effective than it used to be thanks to these improvements.</p>
 <p>The following command can be used to see how the processes are grouped by your init system:</p>
 <div class="highlight"><pre><span class="go">ps xawf -eo pid,user,cgroup,args</span>
 </pre></div>
@@ -63,7 +63,7 @@
 <span class="go">nf_conntrack: table full, dropping packet.</span>
 <span class="go">...</span>
 </pre></div>
-<p>This message is familiar; being a penetration testing company, we are using and abusing of advanced TCP trickery, confusing the hell out of any stateful firewall in the way. Tonight, the cullprit was <a class="reference external" href="https://nmap.org/">Nmap</a> conducting a <a class="reference external" href="https://en.wikipedia.org/wiki/Port_scanner#SYN_scanning">SYN scan</a>...</p>
+<p>This message is familiar; being a penetration testing company, we are using and abusing of advanced TCP trickery, confusing the hell out of any stateful firewall in the way. Tonight, the culprit was <a class="reference external" href="https://nmap.org/">Nmap</a> conducting a <a class="reference external" href="https://en.wikipedia.org/wiki/Port_scanner#SYN_scanning">SYN scan</a>...</p>
 <p>No matter how much resources I could allocate to the tracking table, it will never be big enough... and fundamentally, there is no reason to filter the traffic bridged from the VM to the network using a stateful firewall. In the past I've decided to deal with that specific problem by setting a rule to tell netfilter to specifically disregard the traffic flowing through the bridged devices. This was achieved with the following command:</p>
 <div class="highlight"><pre><span class="go">iptables --table raw -A PREROUTING -m physdev --physdev-is-bridged -j NOTRACK</span>
 </pre></div>
@@ -91,7 +91,7 @@
 		<h2>Comments</h2>
 		<div id="disqus_thread"></div>
 		<script type="text/javascript">
-			var disqus_identifier = "drafts/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt.html";
+			var disqus_identifier = "posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/";
 			(function() {
 				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 				dsq.src = 'http://nextgens.disqus.com/embed.js';
