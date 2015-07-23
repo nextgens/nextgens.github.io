@@ -8,7 +8,7 @@ sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;80&lt;/span&gt; --s
 sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;443&lt;/span&gt; --syn -m cgroup --cgroup &lt;span class="m"&gt;1&lt;/span&gt; -j ACCEPT
 
 &lt;span class="c"&gt;# create a cgroup named firefox&lt;/span&gt;
-sudo cgcreate -t nextgens:users -a nextgens:users -g net_cls:firefox
+sudo cgcreate -t &lt;span class="nv"&gt;$LOGNAME&lt;/span&gt;:users -a &lt;span class="nv"&gt;$LOGNAME&lt;/span&gt;:users -g net_cls:firefox
 &lt;span class="c"&gt;# allocate an identifier to the cgroup&lt;/span&gt;
 &lt;span class="nb"&gt;echo &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &amp;gt; /sys/fs/cgroup/net_cls/firefox/net_cls.classid
 
