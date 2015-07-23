@@ -1,5 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NextGen$'s blog</title><link>http://florent.daigniere.com/</link><description></description><atom:link href="http://florent.daigniere.com/feeds/blog.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 22 Jul 2015 10:02:00 +0100</lastBuildDate><item><title>Disabling connection tracking on bridge interfaces created by libvirt</title><link>http://florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/</link><description>&lt;p&gt;Today I got bitten by a problem I've already encountered in the past... and as I didn't document it properly, I had to google it again! Let this blog entry be a more permanent documentation than the previous one.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NextGen$'s blog</title><link>http://florent.daigniere.com/</link><description></description><atom:link href="http://florent.daigniere.com/feeds/blog.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 23 Jul 2015 15:08:00 +0100</lastBuildDate><item><title>Application firewalling with netfilter</title><link>http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/</link><description>&lt;p&gt;Today I've stumbled upon &lt;a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s"&gt;a post&lt;/a&gt; from my friend &lt;a class="reference external" href="http://blog.tuttu.info/"&gt;Feth&lt;/a&gt;, asking whether allowing &lt;strong&gt;only firefox&lt;/strong&gt; to access the internet was possible on Linux... Of course it is! Here's one of the many ways:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setup the firewall&lt;/span&gt;
+sudo iptables -F OUTPUT
+sudo iptables -P OUTPUT REJECT
+sudo iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;80&lt;/span&gt; --syn -m cgroup --cgroup &lt;span class="m"&gt;1&lt;/span&gt; -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;443&lt;/span&gt; --syn -m cgroup --cgroup &lt;span class="m"&gt;1&lt;/span&gt; -j ACCEPT
+
+&lt;span class="c"&gt;# create a cgroup named firefox&lt;/span&gt;
+sudo cgcreate -t nextgens:users -a nextgens:users -g net_cls:firefox
+&lt;span class="c"&gt;# allocate an identifier to the cgroup&lt;/span&gt;
+&lt;span class="nb"&gt;echo &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &amp;gt; /sys/fs/cgroup/net_cls/firefox/net_cls.classid
+
+&lt;span class="c"&gt;# run firefox&lt;/span&gt;
+cgexec -g net_cls:firefox iceweasel &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The following commands might be useful to debug what's going on:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ls&lt;/span&gt; -ld /sys/fs/cgroup/net_cls/firefox/
+drwx------ &lt;span class="m"&gt;2&lt;/span&gt; nextgens users &lt;span class="m"&gt;0&lt;/span&gt; Jul &lt;span class="m"&gt;23&lt;/span&gt; 18:03 /sys/fs/cgroup/net_cls/firefox/
+&lt;span class="nv"&gt;$cat&lt;/span&gt; /sys/fs/cgroup/net_cls/firefox/cgroup.procs
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Attentive readers will notice that the above doesn't work for at least two reasons:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Distros don't ship a version of &lt;a class="reference external" href="https://lwn.net/Articles/569678/"&gt;netfilter with cgroup support&lt;/a&gt; just yet&lt;/li&gt;
+&lt;li&gt;A browser without DNS resolution is only marginally useful ;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Tomorrow I might blog about how to recompile/repackage a recent-enough version of iptables; Or maybe a different way of doing the same thing involving SElinux and/or network namespaces; Or maybe rant on how useless application firewalls are (both as a security control and an anti-privacy leakage mitigation).&lt;/p&gt;
+&lt;p&gt;Feel free to let me know what you prefer in the comments.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Florent Daignière</dc:creator><pubDate>Thu, 23 Jul 2015 15:08:00 +0100</pubDate><guid>tag:florent.daigniere.com,2015-07-23:posts/2015/07/application-firewalling-with-netfilter/</guid><category>sysadmin</category><category>blog</category></item><item><title>Disabling connection tracking on bridge interfaces created by libvirt</title><link>http://florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/</link><description>&lt;p&gt;Today I got bitten by a problem I've already encountered in the past... and as I didn't document it properly, I had to google it again! Let this blog entry be a more permanent documentation than the previous one.&lt;/p&gt;
 &lt;p&gt;Early in the morning, the supervision system has started alerting me that the response time of one of the virtualization hosts we use at &lt;a class="reference external" href="https://www.trustmatta.com/"&gt;Matta&lt;/a&gt; is going through the roof; making everything 'feel' slow.&lt;/p&gt;
 &lt;p&gt;Connecting to the system through SSH is already taking tens of seconds, indicating that something is indeed seriously wrong. Modern linux systems use resource isolation in the form of &lt;a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt"&gt;cgroups&lt;/a&gt; and are quite resilient to obnoxious programs chewing up resources; The traditional &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Fork_bomb"&gt;fork-bomb&lt;/a&gt; is a lot less effective than it used to be thanks to these improvements.&lt;/p&gt;
 &lt;p&gt;The following command can be used to see how the processes are grouped by your init system:&lt;/p&gt;

@@ -61,6 +61,17 @@
 		<dt>
 				<li>
 					<h1 class="title">
+						<a href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/" rel="bookmark" title="Permalink to Application firewalling with netfilter">Application firewalling with netfilter</a>
+					</h1>
+					<abbr class="published" title="2015-07-23T15:08:00+01:00">23 Jul, 2015</abbr>
+				<div class="entry-content"> <p>Today I've stumbled upon <a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s">a post</a> from my friend <a class="reference external" href="http://blog.tuttu.info/">Feth</a>, asking whether allowing <strong>only firefox</strong> to access the internet was possible on Linux... Of course it is! Here's one of the many ways:</p>
+<div class="highlight"><pre><span class="c"># setup the firewall</span>
+sudo iptables -F OUTPUT
+sudo iptables -P OUTPUT REJECT
+sudo iptables -A ...</pre></div> </div>
+				</li>
+				<li>
+					<h1 class="title">
 						<a href="http://florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/" rel="bookmark" title="Permalink to Disabling connection tracking on bridge interfaces created by libvirt">Disabling connection tracking on bridge interfaces created by libvirt</a>
 					</h1>
 					<abbr class="published" title="2015-07-22T10:02:00+01:00">22 Jul, 2015</abbr>
