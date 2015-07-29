@@ -1,5 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>NextGen$'s blog</title><link href="http://florent.daigniere.com/" rel="alternate"></link><link href="http://florent.daigniere.com/feeds/blog.atom.xml" rel="self"></link><id>http://florent.daigniere.com/</id><updated>2015-07-23T15:08:00+01:00</updated><entry><title>Application firewalling with netfilter</title><link href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/" rel="alternate"></link><updated>2015-07-23T15:08:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-07-23:posts/2015/07/application-firewalling-with-netfilter/</id><summary type="html">&lt;p&gt;Today I've stumbled upon &lt;a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s"&gt;a post&lt;/a&gt; from my friend &lt;a class="reference external" href="http://blog.tuttu.info/"&gt;Feth&lt;/a&gt;, asking whether allowing &lt;strong&gt;only firefox&lt;/strong&gt; to access the internet was possible on Linux... Of course it is! Here's one of the many ways:&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>NextGen$'s blog</title><link href="http://florent.daigniere.com/" rel="alternate"></link><link href="http://florent.daigniere.com/feeds/blog.atom.xml" rel="self"></link><id>http://florent.daigniere.com/</id><updated>2015-07-26T21:45:00+01:00</updated><entry><title>Application firewalling with netfilter (part 2)</title><link href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter-part-2/" rel="alternate"></link><updated>2015-07-26T21:45:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-07-26:posts/2015/07/application-firewalling-with-netfilter-part-2/</id><summary type="html">&lt;p&gt;Last time we've looked into &lt;a class="reference external" href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/"&gt;how to do application firewalling with netfilter&lt;/a&gt; and came up with an answer whose dependencies aren't shipped by mainstream distributions just yet. Today we will find another way of doing the same thing on with the tools everyone have.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# install dependencies&lt;/span&gt;
+sudo apt-get install sudo
+
+&lt;span class="c"&gt;# create a user called &amp;#39;internet&amp;#39;&lt;/span&gt;
+sudo adduser internet
+
+&lt;span class="c"&gt;# setup the firewall&lt;/span&gt;
+sudo iptables -F OUTPUT
+sudo iptables -P OUTPUT REJECT
+sudo iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;80&lt;/span&gt; --syn -m owner --uid-owner internet -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;443&lt;/span&gt; --syn -m owner --uid-owner internet -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;53&lt;/span&gt; --syn -m owner --uid-owner internet -j ACCEPT
+sudo iptables -A OUTPUT -p udp --dport &lt;span class="m"&gt;53&lt;/span&gt; -m owner --uid-owner internet -j ACCEPT
+
+sudo cat &amp;gt; /etc/sudoers.d/internet &lt;span class="s"&gt;&amp;lt;&amp;lt;EOT&lt;/span&gt;
+&lt;span class="s"&gt;Defaults env_keep+=&amp;quot;XAUTHORITY DISPLAY&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;$LOGNAME ALL=(internet) NOPASSWD: /usr/bin/iceweasel&lt;/span&gt;
+&lt;span class="s"&gt;EOT&lt;/span&gt;
+
+&lt;span class="c"&gt;# give access to our MIT-MAGIC-COOKIE to everyone locally (bad idea! man xauth to understand why)&lt;/span&gt;
+chmod a+rx &lt;span class="nv"&gt;$HOME&lt;/span&gt;
+chmod a+r &lt;span class="nv"&gt;$XAUTHORITY&lt;/span&gt;
+
+&lt;span class="c"&gt;# run firefox&lt;/span&gt;
+sudo -u internet /usr/bin/iceweasel
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That works... but is far from perfect. More details on why to follow in my next post.&lt;/p&gt;
+</summary><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Application firewalling with netfilter</title><link href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/" rel="alternate"></link><updated>2015-07-23T15:08:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-07-23:posts/2015/07/application-firewalling-with-netfilter/</id><summary type="html">&lt;p&gt;Today I've stumbled upon &lt;a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s"&gt;a post&lt;/a&gt; from my friend &lt;a class="reference external" href="http://blog.tuttu.info/"&gt;Feth&lt;/a&gt;, asking whether allowing &lt;strong&gt;only firefox&lt;/strong&gt; to access the internet was possible on Linux... Of course it is! Here's one of the many ways:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setup the firewall&lt;/span&gt;
 sudo iptables -F OUTPUT
 sudo iptables -P OUTPUT REJECT
