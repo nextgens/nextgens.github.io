@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="http://florent.daigniere.com/theme/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/theme/css/style.css">
 	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
 	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
-	<link rel="stylesheet" type="text/css" href="http://florent.daigniere.com/theme/css/pygments.css">
-	<link href='http://fonts.googleapis.com/css?family=Open%2bSans%3a800,400,300%7CInconsolata' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css">
+	<link href='//fonts.googleapis.com/css?family=Open%2bSans%3a800,400,300%7CInconsolata' rel='stylesheet' type='text/css' />
 
-	<link href="http://florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed" />
-	<link href="http://florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed" />
+	<link href="//florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed" />
+	<link href="//florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed" />
 
 
 		<title>NextGen$'s blog</title>
@@ -17,15 +17,14 @@
 <body>
 	<section id="sidebar">
 		<figure id="user_logo">
-            <a href="http://florent.daigniere.com"><div class="logo">&nbsp;</div></a>
+            <a href="//florent.daigniere.com"><div class="logo">&nbsp;</div></a>
 		</figure>
 
 		<div class="user_meta">
-            <h1 id="user"><a href="http://florent.daigniere.com" class="">Florent Daigni&egrave;re</a></h1>
+            <h1 id="user"><a href="//florent.daigniere.com" class="">Florent Daigni&egrave;re</a></h1>
 			<h2></h2>
 			<p class="bio">The blog of an opinionated French guy, Technical Director (<a content="nofollow" href="https://www.trustmatta.com/">@Matta</a>), BOFH and core developer (<a content="nofollow" href="https://freenetproject.org">@Freenet</a>), traveller, hacker.</p>
 			<ul>
-						<li><a href="http://florent.daigniere.com/pages/about-florent.html">About Florent</a></li>
 					<li><a href="https://twitter.com/nextgens1">Twitter</a></li>
 					<li><a href="https://uk.linkedin.com/in/nextgens">Linkedin</a></li>
 					<li><a href="https://github.com/nextgens/">Github</a></li>
@@ -37,8 +36,8 @@
 		                theme by <a content="nofollow" href="https://github.com/wting/pelican-svbtle">wting</a>.
 
 			</address>
-				<a href="http://florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />ATOM</a>
-			<a href="http://florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />RSS</a>
+				<a href="//florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />ATOM</a>
+			<a href="//florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />RSS</a>
 		</footer>
 	</section>
 
@@ -49,28 +48,28 @@
 	</header>
 	<article>
 		<h1 id="title">
-			<a href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/" rel="bookmark"
+			<a href="/posts/2015/07/application-firewalling-with-netfilter/" rel="bookmark"
 				title="Permalink to Application firewalling with netfilter">Application firewalling with netfilter</a>
 		</h1>
 		<p>Today I've stumbled upon <a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s">a post</a> from my friend <a class="reference external" href="http://blog.tuttu.info/">Feth</a>, asking whether allowing <strong>only firefox</strong> to access the internet was possible on Linux... Of course it is! Here's one of the many ways:</p>
-<div class="highlight"><pre><span class="c"># setup the firewall</span>
+<div class="highlight"><pre><span></span><span class="c1"># setup the firewall</span>
 sudo iptables -F OUTPUT
 sudo iptables -P OUTPUT REJECT
 sudo iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 sudo iptables -A OUTPUT -p tcp --dport <span class="m">80</span> --syn -m cgroup --cgroup <span class="m">1</span> -j ACCEPT
 sudo iptables -A OUTPUT -p tcp --dport <span class="m">443</span> --syn -m cgroup --cgroup <span class="m">1</span> -j ACCEPT
 
-<span class="c"># create a cgroup named firefox</span>
+<span class="c1"># create a cgroup named firefox</span>
 sudo cgcreate -t <span class="nv">$LOGNAME</span>:users -a <span class="nv">$LOGNAME</span>:users -g net_cls:firefox
-<span class="c"># allocate an identifier to the cgroup</span>
-<span class="nb">echo </span><span class="m">1</span> &gt; /sys/fs/cgroup/net_cls/firefox/net_cls.classid
+<span class="c1"># allocate an identifier to the cgroup</span>
+<span class="nb">echo</span> <span class="m">1</span> &gt; /sys/fs/cgroup/net_cls/firefox/net_cls.classid
 
-<span class="c"># run firefox</span>
+<span class="c1"># run firefox</span>
 cgexec -g net_cls:firefox iceweasel <span class="p">&amp;</span>
 </pre></div>
 <p>The following commands might be useful to debug what's going on:</p>
-<div class="highlight"><pre><span class="nv">$ls</span> -ld /sys/fs/cgroup/net_cls/firefox/
-drwx------ <span class="m">2</span> nextgens users <span class="m">0</span> Jul <span class="m">23</span> 18:03 /sys/fs/cgroup/net_cls/firefox/
+<div class="highlight"><pre><span></span><span class="nv">$ls</span> -ld /sys/fs/cgroup/net_cls/firefox/
+drwx------ <span class="m">2</span> nextgens users <span class="m">0</span> Jul <span class="m">23</span> <span class="m">18</span>:03 /sys/fs/cgroup/net_cls/firefox/
 <span class="nv">$cat</span> /sys/fs/cgroup/net_cls/firefox/cgroup.procs
 </pre></div>
 <p>Attentive readers will notice that the above doesn't work for at least two reasons:</p>
@@ -84,15 +83,15 @@ drwx------ <span class="m">2</span> nextgens users <span class="m">0</span> Jul 
 
 		<div id="article_meta">
 				Category:
-					<a href="http://florent.daigniere.com/category/blog.html">Blog</a>
+					<a href="/category/blog.html">Blog</a>
 				<br />Tags:
-					<a href="http://florent.daigniere.com/tag/sysadmin.html">sysadmin</a>
-					<a href="http://florent.daigniere.com/tag/blog.html">blog</a>
+					<a href="/tag/sysadmin.html">sysadmin</a>
+					<a href="/tag/blog.html">blog</a>
 		</div>
 	</article>
 
 	<footer>
-		<a href="http://florent.daigniere.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+		<a href="/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
 	</footer>
 
 	<div id="comments">

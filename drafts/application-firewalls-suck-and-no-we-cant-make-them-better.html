@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="/theme/css/style.css">
+	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
+	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
+	<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css">
+	<link href='//fonts.googleapis.com/css?family=Open%2bSans%3a800,400,300%7CInconsolata' rel='stylesheet' type='text/css' />
+
+	<link href="//florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed" />
+	<link href="//florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed" />
+
+
+		<title>NextGen$'s blog</title>
+		<meta charset="utf-8" />
+</head>
+<body>
+	<section id="sidebar">
+		<figure id="user_logo">
+            <a href="//florent.daigniere.com"><div class="logo">&nbsp;</div></a>
+		</figure>
+
+		<div class="user_meta">
+            <h1 id="user"><a href="//florent.daigniere.com" class="">Florent Daigni&egrave;re</a></h1>
+			<h2></h2>
+			<p class="bio">The blog of an opinionated French guy, Technical Director (<a content="nofollow" href="https://www.trustmatta.com/">@Matta</a>), BOFH and core developer (<a content="nofollow" href="https://freenetproject.org">@Freenet</a>), traveller, hacker.</p>
+			<ul>
+					<li><a href="https://twitter.com/nextgens1">Twitter</a></li>
+					<li><a href="https://uk.linkedin.com/in/nextgens">Linkedin</a></li>
+					<li><a href="https://github.com/nextgens/">Github</a></li>
+			</ul>
+		</div>
+		<footer>
+			<address>
+				Powered by <a content="nofollow" href="http://pelican.notmyidea.org/">Pelican</a>,
+		                theme by <a content="nofollow" href="https://github.com/wting/pelican-svbtle">wting</a>.
+
+			</address>
+				<a href="//florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />ATOM</a>
+			<a href="//florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />RSS</a>
+		</footer>
+	</section>
+
+	<section id="posts">
+	<header>
+		<h1>Florent Daignière's blog</h1>
+		<h3>Posted 29 Jul, 2015</h3>
+	</header>
+	<article>
+		<h1 id="title">
+			<a href="/drafts/application-firewalls-suck-and-no-we-cant-make-them-better.html" rel="bookmark"
+				title="Permalink to Application Firewalls suck and no, we can't make them 'better'.">Application Firewalls suck and no, we can't make them 'better'.</a>
+		</h1>
+		<p>The last two blog posts were focussed on how to do application firewalling with netfilter. Part one was exploring <a class="reference external" href="/posts/2015/07/application-firewalling-with-netfilter/">netfilter and cgroups</a> and part two was investigating <a class="reference external" href="/posts/2015/07/application-firewalling-with-netfilter-part-2/">netfilter with the owner module (UID/GID)</a>.</p>
+<p>Today we will see why neither solutions are useful security wise, starting with a bit of theory and extrapolate on why it's so hard to coerce <a class="reference external" href="http://www.netfilter.org/">netfilter</a> into doing the same thing as Windows.</p>
+<p>To start things of, let's explore what an An <a class="reference external" href="https://en.wikipedia.org/wiki/Application_firewall">application firewall</a> actually is. According to wikipedia, its definition reads:</p>
+<dl class="docutils">
+<dt>Application Firewall:</dt>
+<dd>An application firewall is a form of firewall that controls input, output, and/or access from, to, or by an application or service. It operates by monitoring and potentially blocking the input, output, or system service calls that do not meet the configured policy of the firewall. The application firewall is typically built to control all network traffic on any OSI layer up to the application layer. It is able to control applications or services specifically, unlike a stateful network firewall, which is - without additional software - unable to control network traffic regarding a specific application. There are two primary categories of application firewalls, network-based application firewalls and host-based application firewalls.</dd>
+</dl>
+<p>Now, for any firewall to bring any benefits, it needs both:</p>
+<ol class="arabic simple">
+<li>a security boundary</li>
+<li>a policy that makes sense</li>
+</ol>
+<p>In practice, Host based application firewalls are <strong>not</strong> deployed over a security boundary and their configured policies hardly ever make sense. Why? <strong>Because (power)users expect to be able to configure them!</strong></p>
+<p>Let's look at each aspect separately:
+Security boundary:</p>
+<p>On windows, firewall changes are limited by a <a class="reference external" href="https://en.wikipedia.org/wiki/User_Account_Control">UAC prompt</a>. UAC is not a security boundary, it's explained in length at <a class="reference external" href="http://blogs.msdn.com/b/e7/archive/2009/02/05/update-on-uac.aspx">http://blogs.msdn.com/b/e7/archive/2009/02/05/update-on-uac.aspx</a>. Any program running can change its associated firewall rules, making it useless as a security control.</p>
+<p>On other OSes, the situation is hardly different. The problem is not a technology problem it's a mismatch in between the security expectations of the users who believe in application firewalling and the constraint imposed</p>
+<p>Policy that makes sense:</p>
+<p>Most users are unable to configure firewalling policies; hell, it's a complicated job even for someone that does it for a living. It requires an in-depth understanding of how the different components of a system interact with each other. It's definitely not something you can expect the average user to know how to do. Let's take the recent example that encouraged me to write this serie of blog posts: <a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s">https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s</a>: The power-user there wants: ''his browser to be able to access port 80 and nothing else''.</p>
+<p>It looks simple enough, right? Well, it's very, very naive.</p>
+<p># What about DNS traffic? How useful is a browser without DNS?
+# What about time synchronization? If the system can't access any <a class="reference external" href="https://en.wikipedia.org/wiki/Network_Time_Protocol">NTP server</a>, odds are it won't work.
+# What about revocation? <a class="reference external" href="https://en.wikipedia.org/wiki/Online_Certificate_Status_Protocol">OSCP servers</a> usually run on high port numbers
+# What about software upgrades? Most are not done through the browsers and a policy such as the one described would prevent them from being deployed.</p>
+<p>Overall, it's clear to me that you can't expect the average power-user to know what he needs... but assuming you do so, how would the Operating System treat such a policy? What's an application? Is it the binaries stored on disk? the instance that's in memory? Something else? None of these questions have clear answers, making any type of Application firewalling useless.</p>
+<p># Any application can rename its process name in the process list
+# Any application instance can be debugged by the user who's launched it (at least by default)</p>
+<blockquote>
+Moreover, even if you do provide him with a solution to do what he expects, he will only shoot himself in the foot. Odds are he didn't even think about what he's really trying to achieve. Last time I've asked one, he said that his main concern was <a class="reference external" href="https://en.wikipedia.org/wiki/Data_loss_prevention_software">Data loss prevention</a>.</blockquote>
+<p>He cares about his</p>
+
+
+		<div id="article_meta">
+				Category:
+					<a href="/category/blog.html">Blog</a>
+				<br />Tags:
+					<a href="/tag/security-theatre.html">security-theatre</a>
+					<a href="/tag/sysadmin.html">sysadmin</a>
+					<a href="/tag/blog.html">blog</a>
+		</div>
+	</article>
+
+	<footer>
+		<a href="/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+	</footer>
+
+	<div id="comments">
+		<h2>Comments</h2>
+		<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			var disqus_identifier = "drafts/application-firewalls-suck-and-no-we-cant-make-them-better.html";
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://nextgens.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+	</div>
+
+	</section>
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', "UA-21805753-2", 'auto');
+ga('require', 'linkid', 'linkid.js');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+</body>
+</html>

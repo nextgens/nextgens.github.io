@@ -4,176 +4,176 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>http://florent.daigniere.com/</loc>
-<lastmod>2015-07-29T18:56:31-00:00</lastmod>
+<loc>//florent.daigniere.com/</loc>
+<lastmod>2018-04-18T13:38:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/archives.html</loc>
-<lastmod>2015-07-29T18:56:31-00:00</lastmod>
+<loc>//florent.daigniere.com/archives.html</loc>
+<lastmod>2018-04-18T13:38:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tags.html</loc>
-<lastmod>2015-07-29T18:56:31-00:00</lastmod>
+<loc>//florent.daigniere.com/tags.html</loc>
+<lastmod>2018-04-18T13:38:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/categories.html</loc>
-<lastmod>2015-07-29T18:56:31-00:00</lastmod>
+<loc>//florent.daigniere.com/categories.html</loc>
+<lastmod>2018-04-18T13:38:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/pages/about-florent.html</loc>
-<lastmod>2015-07-29T18:56:31-00:00</lastmod>
+<loc>//florent.daigniere.com/pages/about-florent.html</loc>
+<lastmod>2018-04-18T13:38:34-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter-part-2/</loc>
+<loc>//florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter-part-2/</loc>
 <lastmod>2015-07-26T21:45:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/</loc>
+<loc>//florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/</loc>
 <lastmod>2015-07-23T15:08:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/</loc>
+<loc>//florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/</loc>
 <lastmod>2015-07-22T10:02:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/</loc>
+<loc>//florent.daigniere.com/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/</loc>
 <lastmod>2015-01-05T19:06:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/</loc>
+<loc>//florent.daigniere.com/posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/</loc>
 <lastmod>2014-06-23T11:06:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2014/06/exploiting-xpath-injection-vulnerabilities-with-xcat/</loc>
+<loc>//florent.daigniere.com/posts/2014/06/exploiting-xpath-injection-vulnerabilities-with-xcat/</loc>
 <lastmod>2014-06-21T11:06:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2014/03/is-santanderuk-compromised/</loc>
+<loc>//florent.daigniere.com/posts/2014/03/is-santanderuk-compromised/</loc>
 <lastmod>2014-03-25T10:10:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/posts/2014/03/hello-world/</loc>
+<loc>//florent.daigniere.com/posts/2014/03/hello-world/</loc>
 <lastmod>2014-03-21T11:06:00+00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/category/blog.html</loc>
-<lastmod>2015-07-26T21:45:00+00:00</lastmod>
+<loc>//florent.daigniere.com/category/blog.html</loc>
+<lastmod>2015-07-26T21:45:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/blog.html</loc>
-<lastmod>2015-07-26T21:45:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/blog.html</loc>
+<lastmod>2015-07-26T21:45:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/spam.html</loc>
-<lastmod>2014-03-25T10:10:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/spam.html</loc>
+<lastmod>2014-03-25T10:10:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/exploitation.html</loc>
-<lastmod>2014-06-23T11:06:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/exploitation.html</loc>
+<lastmod>2014-06-23T11:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/helloworld.html</loc>
-<lastmod>2014-03-21T11:06:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/helloworld.html</loc>
+<lastmod>2014-03-21T11:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/sysadmin.html</loc>
-<lastmod>2015-07-26T21:45:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/sysadmin.html</loc>
+<lastmod>2015-07-26T21:45:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/banking.html</loc>
-<lastmod>2014-03-25T10:10:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/banking.html</loc>
+<lastmod>2014-03-25T10:10:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/edgerouter.html</loc>
-<lastmod>2015-01-05T19:06:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/edgerouter.html</loc>
+<lastmod>2015-01-05T19:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/security.html</loc>
-<lastmod>2014-06-23T11:06:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/security.html</loc>
+<lastmod>2014-06-23T11:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/pwned.html</loc>
-<lastmod>2014-03-25T10:10:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/pwned.html</loc>
+<lastmod>2014-03-25T10:10:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/tag/first.html</loc>
-<lastmod>2014-03-21T11:06:00+00:00</lastmod>
+<loc>//florent.daigniere.com/tag/first.html</loc>
+<lastmod>2014-03-21T11:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://florent.daigniere.com/author/florent-daigniere.html</loc>
-<lastmod>2015-07-26T21:45:00+00:00</lastmod>
+<loc>//florent.daigniere.com/author/florent-daigniere.html</loc>
+<lastmod>2015-07-26T21:45:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

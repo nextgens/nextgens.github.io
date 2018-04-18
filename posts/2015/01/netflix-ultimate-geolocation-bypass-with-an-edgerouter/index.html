@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="http://florent.daigniere.com/theme/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/theme/css/style.css">
 	<!--<link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">-->
 	<!--<script src="/theme/js/less.js" type="text/javascript"></script>-->
-	<link rel="stylesheet" type="text/css" href="http://florent.daigniere.com/theme/css/pygments.css">
-	<link href='http://fonts.googleapis.com/css?family=Open%2bSans%3a800,400,300%7CInconsolata' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css">
+	<link href='//fonts.googleapis.com/css?family=Open%2bSans%3a800,400,300%7CInconsolata' rel='stylesheet' type='text/css' />
 
-	<link href="http://florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed" />
-	<link href="http://florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed" />
+	<link href="//florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed" />
+	<link href="//florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed" />
 
 
 		<title>NextGen$'s blog</title>
@@ -17,15 +17,14 @@
 <body>
 	<section id="sidebar">
 		<figure id="user_logo">
-            <a href="http://florent.daigniere.com"><div class="logo">&nbsp;</div></a>
+            <a href="//florent.daigniere.com"><div class="logo">&nbsp;</div></a>
 		</figure>
 
 		<div class="user_meta">
-            <h1 id="user"><a href="http://florent.daigniere.com" class="">Florent Daigni&egrave;re</a></h1>
+            <h1 id="user"><a href="//florent.daigniere.com" class="">Florent Daigni&egrave;re</a></h1>
 			<h2></h2>
 			<p class="bio">The blog of an opinionated French guy, Technical Director (<a content="nofollow" href="https://www.trustmatta.com/">@Matta</a>), BOFH and core developer (<a content="nofollow" href="https://freenetproject.org">@Freenet</a>), traveller, hacker.</p>
 			<ul>
-						<li><a href="http://florent.daigniere.com/pages/about-florent.html">About Florent</a></li>
 					<li><a href="https://twitter.com/nextgens1">Twitter</a></li>
 					<li><a href="https://uk.linkedin.com/in/nextgens">Linkedin</a></li>
 					<li><a href="https://github.com/nextgens/">Github</a></li>
@@ -37,8 +36,8 @@
 		                theme by <a content="nofollow" href="https://github.com/wting/pelican-svbtle">wting</a>.
 
 			</address>
-				<a href="http://florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />ATOM</a>
-			<a href="http://florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />RSS</a>
+				<a href="//florent.daigniere.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="NextGen$'s blog ATOM Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />ATOM</a>
+			<a href="//florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed"><img src="/images/rss.svg" alt="Subscribe to NextGen$'s blog" height="15" />RSS</a>
 		</footer>
 	</section>
 
@@ -49,7 +48,7 @@
 	</header>
 	<article>
 		<h1 id="title">
-			<a href="http://florent.daigniere.com/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/" rel="bookmark"
+			<a href="/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/" rel="bookmark"
 				title="Permalink to Netflix ultimate geolocation bypass with an edgerouter">Netflix ultimate geolocation bypass with an edgerouter</a>
 		</h1>
 		<p>It looks like <a class="reference external" href="http://www.engadget.com/2015/01/03/netflix-clamps-down-on-vpns/">Netflix has updated their geolocation code</a>... attempting to prevent their users from watching content intended for other regions. This post explores a few technical avenues one might consider to bypass it.</p>
@@ -63,15 +62,15 @@
 <li>FAQ from ISPs</li>
 </ul>
 <p>Of course, <a class="reference external" href="https://en.wikipedia.org/wiki/DNSChanger">I wouldn't trust any of them with my DNS traffic</a> (unlike most of the tutorials I've found on the internet)... So instead of changing the system's resolver to one of them, here is the edgerouter command I've used:</p>
-<div class="highlight"><pre><span class="go">set service dns forwarding options server=/netflix.com/$ip</span>
+<div class="highlight"><pre><span></span><span class="go">set service dns forwarding options server=/netflix.com/$ip</span>
 </pre></div>
 <p>This ensures that only the traffic going to *.netflix.com will be queried through that DNS resolver.</p>
 <p>This has been working for years, up until this month where the application has been updated. Ever since, the geolocation finds out which zone I'm entitled to. TCPDumping the traffic has once again proved useful and told me that now Netflix is doing two different DNS queries using both the system's configured resolver and a hardcoded one (Google's). It then decides which zone you're in, based on the result of both, trusting Google's over your local DNS. So yes; if you used to bypass their zone restriction using DNS, they know it ;)</p>
 <p>My initial (naive) attempt was to try out what happens when Google can't be reached. The following command does just that:</p>
-<div class="highlight"><pre><span class="go">set protocols static route 8.8.8.8 blackhole</span>
+<div class="highlight"><pre><span></span><span class="go">set protocols static route 8.8.8.8 blackhole</span>
 </pre></div>
 <p>This works for some definition of &quot;work&quot;. The stream will eventually start but you will have to wait for timeouts while navigating and picking your movie; making the whole trick sub-optimal. A better solution is to do destination NAT and pretend that our local resolver is Google's. it can be achieved using the following config:</p>
-<div class="highlight"><pre><span class="go">edit service nat rule 4999</span>
+<div class="highlight"><pre><span></span><span class="go">edit service nat rule 4999</span>
 <span class="go"> description netflix</span>
 <span class="go"> destination {</span>
 <span class="go">     address 8.8.8.8</span>
@@ -85,24 +84,24 @@
 <span class="go"> type destination</span>
 </pre></div>
 <p>Using iptables, it would look like that:</p>
-<div class="highlight"><pre>iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i <span class="nv">$LAN_IF</span> -p udp -m udp --dport <span class="m">53</span> -j DNAT --to-destination <span class="nv">$LAN_IP</span>
-iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i <span class="nv">$LAN_IF</span> -p tcp -m tcp --dport <span class="m">53</span> -j DNAT --to-destination <span class="nv">$LAN_IP</span>
+<div class="highlight"><pre><span></span>iptables -t nat -A PREROUTING -d <span class="m">8</span>.8.8.8/32 -i <span class="nv">$LAN_IF</span> -p udp -m udp --dport <span class="m">53</span> -j DNAT --to-destination <span class="nv">$LAN_IP</span>
+iptables -t nat -A PREROUTING -d <span class="m">8</span>.8.8.8/32 -i <span class="nv">$LAN_IF</span> -p tcp -m tcp --dport <span class="m">53</span> -j DNAT --to-destination <span class="nv">$LAN_IP</span>
 </pre></div>
 <p>That works wonders and is the ultimate solution to me. It's not wasting bandwidth encapsulating traffic through a tunnel nor trusting random unknowns on the internet to route it for me... and it's free!</p>
 
 
 		<div id="article_meta">
 				Category:
-					<a href="http://florent.daigniere.com/category/blog.html">Blog</a>
+					<a href="/category/blog.html">Blog</a>
 				<br />Tags:
-					<a href="http://florent.daigniere.com/tag/edgerouter.html">edgerouter</a>
-					<a href="http://florent.daigniere.com/tag/sysadmin.html">sysadmin</a>
-					<a href="http://florent.daigniere.com/tag/blog.html">blog</a>
+					<a href="/tag/edgerouter.html">edgerouter</a>
+					<a href="/tag/sysadmin.html">sysadmin</a>
+					<a href="/tag/blog.html">blog</a>
 		</div>
 	</article>
 
 	<footer>
-		<a href="http://florent.daigniere.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+		<a href="/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
 	</footer>
 
 	<div id="comments">

