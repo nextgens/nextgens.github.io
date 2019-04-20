@@ -5,35 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>//florent.daigniere.com/</loc>
-<lastmod>2019-04-20T13:53:00-00:00</lastmod>
+<lastmod>2019-04-20T14:35:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//florent.daigniere.com/archives.html</loc>
-<lastmod>2019-04-20T13:53:00-00:00</lastmod>
+<lastmod>2019-04-20T14:35:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//florent.daigniere.com/tags.html</loc>
-<lastmod>2019-04-20T13:53:00-00:00</lastmod>
+<lastmod>2019-04-20T14:35:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//florent.daigniere.com/categories.html</loc>
-<lastmod>2019-04-20T13:53:00-00:00</lastmod>
+<lastmod>2019-04-20T14:35:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//florent.daigniere.com/pages/about-florent.html</loc>
-<lastmod>2019-04-20T13:53:00-00:00</lastmod>
+<lastmod>2019-04-20T14:35:16-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>//florent.daigniere.com/posts/2019/04/extracting-voip-credentials-from-my-broadband-router/</loc>
+<lastmod>2019-04-20T19:06:00+01:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -110,27 +117,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>//florent.daigniere.com/category/blog.html</loc>
-<lastmod>2019-04-14T19:06:00-00:01</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>//florent.daigniere.com/tag/tpm.html</loc>
-<lastmod>2019-04-14T19:06:00-00:01</lastmod>
+<lastmod>2019-04-20T19:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//florent.daigniere.com/tag/sysadmin.html</loc>
-<lastmod>2019-04-14T19:06:00-00:01</lastmod>
+<lastmod>2019-04-20T19:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>//florent.daigniere.com/tag/blog.html</loc>
+<lastmod>2019-04-20T19:06:00-00:01</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>//florent.daigniere.com/tag/tpm.html</loc>
 <lastmod>2019-04-14T19:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -201,7 +208,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>//florent.daigniere.com/author/florent-daigniere.html</loc>
-<lastmod>2019-04-14T19:06:00-00:01</lastmod>
+<lastmod>2019-04-20T19:06:00-00:01</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

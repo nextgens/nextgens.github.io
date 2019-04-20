@@ -11,7 +11,7 @@
 	<link href="//florent.daigniere.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="NextGen$'s blog RSS Feed" />
 
 
-		<title>NextGen$'s blog - Authors</title>
+		<title>NextGen$'s blog</title>
 		<meta charset="utf-8" />
 </head>
 <body>
@@ -42,10 +42,51 @@
 	</section>
 
 	<section id="posts">
-    <h1>Authors on NextGen$'s blog</h1>
-    <ul>
-        <li><a href="/author/florent-daigniere.html">Florent Daignière</a> (11)</li>
-    </ul>
+	<header>
+		<h1>Florent Daignière's blog</h1>
+		<h3>Posted 20 Apr, 2019</h3>
+	</header>
+	<article>
+		<h1 id="title">
+			<a href="/posts/2019/04/extracting-voip-credentials-from-my-broadband-router/" rel="bookmark"
+				title="Permalink to Extracting voip credentials from my broadband router">Extracting voip credentials from my broadband router</a>
+		</h1>
+		<p>One of the advantages of being in France is that you get to enjoy reasonably fast FTTH for cheap. Dirt cheap. I use Red by SFR and pay 20EUR/month for ~1Gb/s downlink and ~300Mb/s uplink with ~3ms of latency out of their network!</p>
+<img alt="" src="https://pic.nperf.com/r/3186199871022483-VBai6TQx.png" />
+<p>Too bad ISPs go out of their way to make it hard for you to switch their crappy equipment with your own. Luckily, I have found an online <a class="reference external" href="https://lafibre.info/remplacer-sfr/">online community of enthusiasts</a> who are maintaining a knowledgebase with the magic incantations required to make it work.</p>
+<p>The ISP also provides unlimited calls, but getting voip to work involves retrieving credentials that are not readily accessible, making it very impractical. In a bid to improve upon the status quo, I'll share code that just spits out the configuration bits you need to configure your own SIP client.</p>
+<p>I have been asked to obfuscate the magic going on underneeth and will only make it available in binary form (that I may or may not update, depending on the feedback I get).</p>
+<p>Here are download links for <a class="reference external" href="/static/extract-voip-parameters_v1">Linux/x64</a> and <a class="reference external" href="/static/extract-voip-parameters_v1.exe">Windows/x64</a>.</p>
+<p>Thanks to maximushugus for providing a key element to make this possible.</p>
+
+
+		<div id="article_meta">
+				Category:
+					<a href="/category/blog.html">Blog</a>
+				<br />Tags:
+					<a href="/tag/sysadmin.html">sysadmin</a>
+					<a href="/tag/blog.html">blog</a>
+		</div>
+	</article>
+
+	<footer>
+		<a href="/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+	</footer>
+
+	<div id="comments">
+		<h2>Comments</h2>
+		<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			var disqus_identifier = "posts/2019/04/extracting-voip-credentials-from-my-broadband-router/";
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://nextgens.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+			})();
+		</script>
+		<noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+	</div>
+
 	</section>
 
 <!-- Google Analytics -->
